@@ -18,8 +18,8 @@ export default function Hero() {
           </span>
 
           <h1 className="mt-4 font-['ClashDisplay-Regular'] text-4xl font-normal leading-[1.1] text-white md:text-5xl">
-  Sistemas que evoluem <em className="italic text-[#FD7B01]">junto</em> com sua operação.
-</h1>
+             Sistemas que evoluem <em className="italic text-[#FD7B01]">junto</em> com sua operação.
+          </h1>
 
           <p className="mt-6 max-w-md font-['Inter'] text-base leading-relaxed text-white/60">
             Desenvolvemos, modernizamos e integramos os sistemas que sustentam
