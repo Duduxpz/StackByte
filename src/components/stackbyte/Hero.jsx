@@ -53,7 +53,7 @@ export default function Hero() {
         </div>
 
         <div className="relative flex items-center justify-center">
-          <Hero3DLogo className="h-[340px] w-full md:h-[460px]" />
+          <Hero3DLogo className="h-[400px] w-full md:h-[540px]" />
         </div>
       </div>
     </section>

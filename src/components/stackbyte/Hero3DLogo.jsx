@@ -36,10 +36,10 @@ function makeFaceCanvas(topColor, bottomColor, accent) {
 }
 
 function responsiveScale(width) {
-  if (width < 480) return 0.95;
-  if (width < 768) return 1.1;
-  if (width < 1200) return 1.25;
-  return 1.35;
+  if (width < 480) return 6.5;
+  if (width < 768) return 7.8;
+  if (width < 1200) return 8.8;
+  return 9.5;
 }
 
 /**
@@ -60,15 +60,15 @@ export default function Hero3DLogo({ className = '' }) {
     const scene = new THREE.Scene();
     scene.background = null;
 
-    const camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 2000);
-    camera.position.set(0, 10, 380);
+    const camera = new THREE.PerspectiveCamera(44, width / height, 0.1, 2000);
+    camera.position.set(0, 10, 1800);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 0.95;
     mount.appendChild(renderer.domElement);
 
     // ---------- procedural studio environment (for chrome reflections) ----------
@@ -118,42 +118,17 @@ export default function Hero3DLogo({ className = '' }) {
     // ---------- lighting ----------
     scene.add(new THREE.AmbientLight(0x1a1418, 0.5));
     const key = new THREE.DirectionalLight(0xffffff, 1.6);
-    key.position.set(140, 200, 240);
+    key.position.set(980, 1400, 1680);
     scene.add(key);
-    const warm = new THREE.PointLight(0xff9d00, 3.2, 900);
-    warm.position.set(-170, -40, 200);
+    const warm = new THREE.PointLight(0xff9d00, 1.6, 4900);
+    warm.position.set(-1190, 420, 1400);
     scene.add(warm);
-    const rim = new THREE.PointLight(0xffffff, 2.2, 900);
-    rim.position.set(20, 140, -220);
+    const rim = new THREE.PointLight(0xffffff, 2.2, 6300);
+    rim.position.set(140, 980, -1540);
     scene.add(rim);
-    const kicker = new THREE.PointLight(0xfd7b01, 2.6, 700);
-    kicker.position.set(180, 60, 120);
+    const kicker = new THREE.PointLight(0xfd7b01, 2.0, 4900);
+    kicker.position.set(1260, 420, 840);
     scene.add(kicker);
-    const fill = new THREE.PointLight(0xc84a00, 1.8, 600);
-    fill.position.set(0, -140, -100);
-    scene.add(fill);
-
-    // soft floor glow
-    const glowMat = new THREE.SpriteMaterial({
-      color: 0xfd7b01,
-      transparent: true,
-      opacity: 0.3,
-      map: (() => {
-        const c = document.createElement('canvas');
-        c.width = c.height = 256;
-        const ctx = c.getContext('2d');
-        const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-        g.addColorStop(0, 'rgba(253,123,1,0.5)');
-        g.addColorStop(1, 'rgba(253,123,1,0)');
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, 256, 256);
-        return new THREE.CanvasTexture(c);
-      })(),
-    });
-    const glow = new THREE.Sprite(glowMat);
-    glow.scale.set(240, 100, 1);
-    glow.position.set(0, -70, 10);
-    scene.add(glow);
 
     // ---------- interaction ----------
     let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
