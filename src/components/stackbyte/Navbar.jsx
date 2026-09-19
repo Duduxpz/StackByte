@@ -12,10 +12,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#14131E]/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#080505]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <span className="font-['Fraunces'] text-lg font-semibold text-white">
-          Stack<span className="text-[#FF5B00]">Byte</span>
+          Stack<span className="text-[#FD7B01]">Byte</span>
         </span>
 
         <nav className="hidden items-center gap-8 font-['Inter'] text-sm text-white/70 md:flex">
@@ -28,7 +28,7 @@ export default function Navbar() {
 
         <a
           href="#contato"
-          className="hidden rounded-full bg-[#FF5B00] px-5 py-2 font-['Inter'] text-sm font-medium text-black transition-opacity hover:opacity-90 md:inline-block"
+          className="hidden rounded-full bg-[#FD7B01] px-5 py-2 font-['Inter'] text-sm font-medium text-black transition-opacity hover:opacity-90 md:inline-block"
         >
           Fale com a gente
         </a>
@@ -52,7 +52,7 @@ export default function Navbar() {
           ))}
           <a
             href="#contato"
-            className="mt-2 w-fit rounded-full bg-[#FF5B00] px-5 py-2 font-medium text-black"
+            className="mt-2 w-fit rounded-full bg-[#FD7B01] px-5 py-2 font-medium text-black"
             onClick={() => setOpen(false)}
           >
             Fale com a gente

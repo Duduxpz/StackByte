@@ -21,13 +21,13 @@ const cases = [
 
 export default function CaseStudies() {
   return (
-    <section id="projetos" className="bg-[#14131E] py-24">
+    <section id="projetos" className="bg-[#080505] py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-12 flex items-end justify-between gap-6">
           <h2 className="font-['Fraunces'] text-3xl font-semibold text-white md:text-4xl">
             Projetos recentes
           </h2>
-          <a href="#contato" className="font-['Inter'] text-sm text-[#FF5B00] hover:underline">
+          <a href="#contato" className="font-['Inter'] text-sm text-[#FD7B01] hover:underline">
             Ver todos os projetos
           </a>
         </div>
@@ -40,7 +40,7 @@ export default function CaseStudies() {
                 i === 1 ? 'md:mt-8' : ''
               }`}
             >
-              <div className="font-['Fraunces'] text-3xl font-semibold text-[#FF5B00]">
+              <div className="font-['Fraunces'] text-3xl font-semibold text-[#FD7B01]">
                 {item.metric}
               </div>
               <div className="mt-1 font-['Inter'] text-xs text-white/40">{item.metricLabel}</div>

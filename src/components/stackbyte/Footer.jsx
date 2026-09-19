@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-16 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
           <div>
             <span className="font-['Fraunces'] text-lg font-semibold text-white">
-              Stack<span className="text-[#FF5B00]">Byte</span>
+              Stack<span className="text-[#FD7B01]">Byte</span>
             </span>
             <p className="mt-4 max-w-xs font-['Inter'] text-sm leading-relaxed text-white/50">
               Engenharia de software e modernização de sistemas para empresas
@@ -70,7 +70,7 @@ export default function Footer() {
               <button
                 type="submit"
                 aria-label="Inscrever"
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#FF5B00] text-black"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#FD7B01] text-black"
               >
                 <ArrowRight size={16} />
               </button>

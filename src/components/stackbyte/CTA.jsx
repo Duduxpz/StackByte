@@ -1,6 +1,6 @@
 export default function CTA() {
   return (
-    <section id="contato" className="bg-[#FF5B00] py-20">
+    <section id="contato" className="bg-[#FD7B01] py-20">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center">
         <h2 className="max-w-xl font-['Fraunces'] text-3xl font-semibold text-black md:text-4xl">
           Vamos modernizar a sua stack.

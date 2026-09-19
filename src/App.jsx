@@ -8,7 +8,7 @@ import Footer from './components/stackbyte/Footer';
 
 function App() {
   return (
-    <div className="bg-[#14131E] text-white">
+    <div className="bg-[#080505] text-white">
       <Navbar />
       <Hero />
       <WhatWeDo />

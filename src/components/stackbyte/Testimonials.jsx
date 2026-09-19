@@ -2,7 +2,7 @@ export default function Testimonials() {
   return (
     <section className="bg-black py-24">
       <div className="mx-auto max-w-3xl px-6 text-center">
-        <span className="font-['Inter'] text-xs font-medium tracking-wide text-[#FF5B00]">
+        <span className="font-['Inter'] text-xs font-medium tracking-wide text-[#FD7B01]">
           O que dizem nossos clientes
         </span>
 
@@ -12,7 +12,7 @@ export default function Testimonials() {
         </p>
 
         <div className="mt-8 flex items-center justify-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-[#FF5B00]/20" />
+          <div className="h-10 w-10 rounded-full bg-[#FD7B01]/20" />
           <div className="text-left">
             <div className="font-['Inter'] text-sm font-medium text-white">Renata Alves</div>
             <div className="font-['Inter'] text-xs text-white/40">CTO, Grupo Meridian</div>

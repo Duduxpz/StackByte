@@ -32,7 +32,7 @@ export default function WhatWeDo() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="servicos" className="bg-[#14131E] py-24">
+    <section id="servicos" className="bg-[#080505] py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="mb-12 font-['Fraunces'] text-3xl font-semibold text-white md:text-4xl">
           O que a StackByte faz
@@ -58,7 +58,7 @@ export default function WhatWeDo() {
           </ul>
 
           <div className="rounded-2xl border border-white/10 bg-black/40 p-8">
-            <div className="mb-4 h-1 w-12 rounded-full bg-[#FF5B00]" />
+            <div className="mb-4 h-1 w-12 rounded-full bg-[#FD7B01]" />
             <h3 className="font-['Fraunces'] text-xl font-semibold text-white">
               {services[active].title}
             </h3>
