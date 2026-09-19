@@ -36,10 +36,10 @@ function makeFaceCanvas(topColor, bottomColor, accent) {
 }
 
 function responsiveScale(width) {
-  if (width < 480) return 6.5;
-  if (width < 768) return 7.8;
-  if (width < 1200) return 8.8;
-  return 9.5;
+  if (width < 480) return 4.5;   // celular pequeno
+  if (width < 768) return 8.8;   // celular grande / tablet
+  if (width < 1200) return 12.2;  // notebook
+  return 12.4;                    // desktop grande
 }
 
 /**

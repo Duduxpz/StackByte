@@ -1,9 +1,9 @@
 import Hero3DLogo from './Hero3DLogo';
 
 const stats = [
-  { value: '99.9%', label: 'Uptime médio' },
-  { value: '120+', label: 'Sistemas entregues' },
-  { value: '-40%', label: 'Tempo de resposta' },
+  { value: '87%', label: 'Uptime médio' },
+  { value: '17...', label: 'Sistemas entregues' },
+  { value: '94%', label: 'Tempo de resposta' },
 ];
 
 export default function Hero() {
@@ -17,9 +17,9 @@ export default function Hero() {
             Engenharia de software &amp; sistemas
           </span>
 
-          <h1 className="mt-4 font-['Fraunces'] text-4xl font-semibold leading-[1.1] text-white md:text-5xl">
-            Sistemas que evoluem <em className="italic text-[#FD7B01]">junto</em> com sua operação.
-          </h1>
+          <h1 className="mt-4 font-['ClashDisplay-Regular'] text-4xl font-normal leading-[1.1] text-white md:text-5xl">
+  Sistemas que evoluem <em className="italic text-[#FD7B01]">junto</em> com sua operação.
+</h1>
 
           <p className="mt-6 max-w-md font-['Inter'] text-base leading-relaxed text-white/60">
             Desenvolvemos, modernizamos e integramos os sistemas que sustentam

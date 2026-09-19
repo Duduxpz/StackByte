@@ -14,9 +14,11 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#080505]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <span className="font-['Fraunces'] text-lg font-semibold text-white">
-          Stack<span className="text-[#FD7B01]">Byte</span>
-        </span>
+        <img
+          src="/Ativo 2@3x.png"
+          alt="StackByte"
+          className="h-7 w-auto object-contain md:h-8"
+        />
 
         <nav className="hidden items-center gap-8 font-['Inter'] text-sm text-white/70 md:flex">
           {links.map((link) => (

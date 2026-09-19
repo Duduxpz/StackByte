@@ -2,7 +2,7 @@ const cases = [
   {
     client: 'Grupo Meridian',
     summary: 'Migração de sistema de faturamento legado para arquitetura em nuvem.',
-    metric: '-62%',
+    metric: '87%',
     metricLabel: 'tempo de processamento',
   },
   {

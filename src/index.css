@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Inter', sans-serif;
+  font-family: 'ClashDisplay-Regular', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #ffffff;
@@ -36,4 +36,12 @@ a,
 button,
 input {
   font-family: inherit;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Regular';
+  src: url('./assets/fonts/ClashDisplay-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
