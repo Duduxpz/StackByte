@@ -1,8 +1,10 @@
-import Hero3DLogo from './Hero3DLogo';
+import { lazy, Suspense } from 'react';
+
+const Hero3DLogo = lazy(() => import('./Hero3DLogo'));
 
 const stats = [
   { value: '87%', label: 'Uptime médio' },
-  { value: '+ 17', label: 'Sistemas entregues' },
+  { value: '17...', label: 'Sistemas entregues' },
   { value: '94%', label: 'Tempo de resposta' },
 ];
 
@@ -53,7 +55,13 @@ export default function Hero() {
         </div>
 
         <div className="relative flex items-center justify-center">
-          <Hero3DLogo className="h-[500px] w-full md:h-[680px]" />
+          <Suspense
+            fallback={
+              <div className="h-[500px] w-full animate-pulse rounded-full bg-[#FD7B01]/5 md:h-[680px]" />
+            }
+          >
+            <Hero3DLogo className="h-[500px] w-full md:h-[680px]" />
+          </Suspense>
         </div>
       </div>
     </section>

@@ -1,5 +1,25 @@
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import {
+  Scene,
+  PerspectiveCamera,
+  WebGLRenderer,
+  SRGBColorSpace,
+  ACESFilmicToneMapping,
+  CubeTexture,
+  Shape,
+  ExtrudeGeometry,
+  MeshPhysicalMaterial,
+  DoubleSide,
+  Group,
+  Mesh,
+  Box3,
+  Sphere,
+  MathUtils,
+  AmbientLight,
+  DirectionalLight,
+  PointLight,
+  Clock,
+} from 'three';
 
 // Turns a 3-point centerline (T -> A -> B) into a closed, uniform-thickness
 // chevron polygon with a mitered inner joint at A and flat (butt) caps at T/B.
@@ -11,7 +31,7 @@ const RIGHT_ARM = [[3.28,40.08],[33.36,1.68],[3.6,-40.08],[23.92,-40.08],[47.6,-
 const SQUARE = [[-9.68,10.32],[-10.16,9.84],[-10.16,-9.68],[-9.68,-10.16],[10.0,-10.0],[10.16,10.0]];
 
 function shapeFromPoints(pts) {
-  const shape = new THREE.Shape();
+  const shape = new Shape();
   pts.forEach(([x, y], i) => (i === 0 ? shape.moveTo(x, y) : shape.lineTo(x, y)));
   shape.closePath();
   return shape;
@@ -56,18 +76,19 @@ export default function Hero3DLogo({ className = '' }) {
 
     let width = mount.clientWidth;
     let height = mount.clientHeight;
+    const isMobile = width < 768;
 
-    const scene = new THREE.Scene();
+    const scene = new Scene();
     scene.background = null;
 
-    const camera = new THREE.PerspectiveCamera(44, width / height, 0.1, 6000);
+    const camera = new PerspectiveCamera(44, width / height, 0.1, 6000);
     camera.position.set(0, 10, 2600);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new WebGLRenderer({ antialias: !isMobile, alpha: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+    renderer.outputColorSpace = SRGBColorSpace;
+    renderer.toneMapping = ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.95;
     mount.appendChild(renderer.domElement);
 
@@ -80,17 +101,22 @@ export default function Hero3DLogo({ className = '' }) {
       makeFaceCanvas('#3a1c08', '#080505', 'rgba(255,157,0,0.55)'),
       makeFaceCanvas('#2a1506', '#080505', 'rgba(255,255,255,0.45)'),
     ];
-    const envMap = new THREE.CubeTexture(envFaces);
+    const envMap = new CubeTexture(envFaces);
     envMap.needsUpdate = true;
     scene.environment = envMap;
 
     // ---------- logo geometry ----------
     const extrudeSettings = {
-      depth: 16, bevelEnabled: true, bevelThickness: 2.2, bevelSize: 2.2, bevelSegments: 6, curveSegments: 12,
+      depth: 16,
+      bevelEnabled: true,
+      bevelThickness: 2.2,
+      bevelSize: 2.2,
+      bevelSegments: isMobile ? 3 : 6,
+      curveSegments: isMobile ? 6 : 12,
     };
     const squareExtrude = { ...extrudeSettings, depth: 14, bevelThickness: 1.6, bevelSize: 1.6 };
 
-    const chromeMat = new THREE.MeshPhysicalMaterial({
+    const chromeMat = new MeshPhysicalMaterial({
       color: 0xfd7b01,
       metalness: 1,
       roughness: 0.05,
@@ -98,21 +124,21 @@ export default function Hero3DLogo({ className = '' }) {
       clearcoatRoughness: 0.02,
       envMapIntensity: 2.1,
       reflectivity: 1,
-      side: THREE.DoubleSide,
+      side: DoubleSide,
       emissive: 0x3a1600,
       emissiveIntensity: 0.08,
     });
 
-    const logoGroup = new THREE.Group();
+    const logoGroup = new Group();
     [LEFT_ARM, RIGHT_ARM].forEach((pts) => {
-      const geo = new THREE.ExtrudeGeometry(shapeFromPoints(pts), extrudeSettings);
-      const mesh = new THREE.Mesh(geo, chromeMat);
+      const geo = new ExtrudeGeometry(shapeFromPoints(pts), extrudeSettings);
+      const mesh = new Mesh(geo, chromeMat);
       mesh.position.z = -extrudeSettings.depth / 2;
       mesh.frustumCulled = false;
       logoGroup.add(mesh);
     });
-    const sqGeo = new THREE.ExtrudeGeometry(shapeFromPoints(SQUARE), squareExtrude);
-    const sqMesh = new THREE.Mesh(sqGeo, chromeMat);
+    const sqGeo = new ExtrudeGeometry(shapeFromPoints(SQUARE), squareExtrude);
+    const sqMesh = new Mesh(sqGeo, chromeMat);
     sqMesh.position.z = -squareExtrude.depth / 2;
     logoGroup.add(sqMesh);
 
@@ -126,9 +152,9 @@ export default function Hero3DLogo({ className = '' }) {
     // causing it to be clipped as the object rotated.
     const fitCamera = () => {
       logoGroup.updateMatrixWorld(true);
-      const box = new THREE.Box3().setFromObject(logoGroup);
-      const sphere = box.getBoundingSphere(new THREE.Sphere());
-      const halfFov = THREE.MathUtils.degToRad(camera.fov * 0.5);
+      const box = new Box3().setFromObject(logoGroup);
+      const sphere = box.getBoundingSphere(new Sphere());
+      const halfFov = MathUtils.degToRad(camera.fov * 0.5);
       const distanceForHeight = sphere.radius / Math.tan(halfFov);
       const distanceForWidth = sphere.radius / (Math.tan(halfFov) * camera.aspect);
       const distance = Math.max(distanceForHeight, distanceForWidth) * 1.32;
@@ -140,19 +166,21 @@ export default function Hero3DLogo({ className = '' }) {
     fitCamera();
 
     // ---------- lighting ----------
-    scene.add(new THREE.AmbientLight(0x1a1418, 0.5));
-    const key = new THREE.DirectionalLight(0xffffff, 1.6);
+    scene.add(new AmbientLight(0x1a1418, 0.5));
+    const key = new DirectionalLight(0xffffff, 1.6);
     key.position.set(980, 1400, 1680);
     scene.add(key);
-    const warm = new THREE.PointLight(0xff9d00, 1.6, 4900);
-    warm.position.set(-1190, 420, 1400);
-    scene.add(warm);
-    const rim = new THREE.PointLight(0xffffff, 2.2, 6300);
+    const rim = new PointLight(0xffffff, 2.2, 6300);
     rim.position.set(140, 980, -1540);
     scene.add(rim);
-    const kicker = new THREE.PointLight(0xfd7b01, 2.0, 4900);
-    kicker.position.set(1260, 420, 840);
-    scene.add(kicker);
+    if (!isMobile) {
+      const warm = new PointLight(0xff9d00, 1.6, 4900);
+      warm.position.set(-1190, 420, 1400);
+      scene.add(warm);
+      const kicker = new PointLight(0xfd7b01, 2.0, 4900);
+      kicker.position.set(1260, 420, 840);
+      scene.add(kicker);
+    }
 
     // ---------- interaction ----------
     let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
@@ -163,9 +191,11 @@ export default function Hero3DLogo({ className = '' }) {
     };
     window.addEventListener('mousemove', onMouseMove);
 
-    const clock = new THREE.Clock();
+    const clock = new Clock();
     let frameId;
+    let running = true;
     function animate() {
+      if (!running) return;
       frameId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
       curX += (mouseX - curX) * 0.05;
@@ -175,6 +205,17 @@ export default function Hero3DLogo({ className = '' }) {
       renderer.render(scene, camera);
     }
     animate();
+
+    const onVisibility = () => {
+      running = !document.hidden;
+      if (running) {
+        clock.getDelta(); // avoid a big time jump after coming back
+        animate();
+      } else {
+        cancelAnimationFrame(frameId);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
 
     const onResize = () => {
       width = mount.clientWidth;
@@ -189,9 +230,11 @@ export default function Hero3DLogo({ className = '' }) {
     window.addEventListener('resize', onResize);
 
     return () => {
+      running = false;
       cancelAnimationFrame(frameId);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibility);
       renderer.dispose();
       chromeMat.dispose();
       envFaces.forEach(() => {});
