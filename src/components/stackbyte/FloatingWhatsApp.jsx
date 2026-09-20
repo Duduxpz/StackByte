@@ -1,7 +1,7 @@
 const WHATSAPP_NUMBER = '5581999999999';
 const DEFAULT_MESSAGE = 'Olá! Sou cliente da StackByte e preciso de suporte com um sistema em produção.';
 
-export default function FloatingWhatsapp() {
+export default function FloatingWhatsApp() {
   const whatsappLink = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
   return (
