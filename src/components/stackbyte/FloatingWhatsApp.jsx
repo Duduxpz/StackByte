@@ -17,7 +17,7 @@ export default function FloatingWhatsApp() {
         alt="WhatsApp"
         className="h-7 w-7 object-contain drop-shadow-sm"
       />
-      <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-lg bg-black/80 px-3 py-1.5 font-['Inter'] text-xs text-white group-hover:md:block">
+      <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-lg bg-black/80 px-3 py-1.5 font-['ClashDisplay-Regular'] text-xs text-white group-hover:md:block">
         Suporte StackByte
       </span>
     </a>
