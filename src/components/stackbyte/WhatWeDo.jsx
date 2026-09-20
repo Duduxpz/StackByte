@@ -34,7 +34,7 @@ export default function WhatWeDo() {
   return (
     <section id="servicos" className="bg-[#080505] py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="mb-12 font-['Fraunces'] text-3xl font-semibold text-white md:text-4xl">
+        <h2 className="mb-12 font-['ClashDisplay-Regular'] text-3xl font-semibold text-white md:text-4xl">
           O que a StackByte faz
         </h2>
 
@@ -48,10 +48,10 @@ export default function WhatWeDo() {
                     active === i ? 'text-white' : 'text-white/50 hover:text-white/80'
                   }`}
                 >
-                  <span className="font-['Inter'] text-xs text-white/30">
+                  <span className="font-['ClashDisplay-Regular'] text-xs text-white/30">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-['Fraunces'] text-lg font-medium">{service.title}</span>
+                  <span className="font-['ClashDisplay-Regular'] text-lg font-medium">{service.title}</span>
                 </button>
               </li>
             ))}
@@ -59,10 +59,10 @@ export default function WhatWeDo() {
 
           <div className="rounded-2xl border border-white/10 bg-black/40 p-8">
             <div className="mb-4 h-1 w-12 rounded-full bg-[#FD7B01]" />
-            <h3 className="font-['Fraunces'] text-xl font-semibold text-white">
+            <h3 className="font-['ClashDisplay-Regular'] text-xl font-semibold text-white">
               {services[active].title}
             </h3>
-            <p className="mt-4 font-['Inter'] text-sm leading-relaxed text-white/60">
+            <p className="mt-4 font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/60">
               {services[active].description}
             </p>
           </div>
