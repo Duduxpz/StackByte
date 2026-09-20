@@ -1,24 +1,21 @@
-import Navbar from './components/stackbyte/Navbar';
-import Hero from './components/stackbyte/Hero';
-import WhatWeDo from './components/stackbyte/WhatWeDo';
-import CaseStudies from './components/stackbyte/CaseStudies';
-import Testimonials from './components/stackbyte/Testimonials';
-import CTA from './components/stackbyte/CTA';
-import Footer from './components/stackbyte/Footer';
-import FloatingWhatsApp from './components/stackbyte/Floatingwhatsapp';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import ServicoDetalhe from './pages/ServicoDetalhe';
+import Sobre from './pages/Sobre';
+import Projetos from './pages/Projetos';
+import Carreiras from './pages/Carreiras';
+import Contato from './pages/Contato';
 
 function App() {
   return (
-    <div className="bg-[#080505] text-white">
-      <Navbar />
-      <Hero />
-      <WhatWeDo />
-      <CaseStudies />
-      <Testimonials />
-      <CTA />
-      <Footer />
-      <FloatingWhatsApp />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/servicos/:slug" element={<ServicoDetalhe />} />
+      <Route path="/sobre" element={<Sobre />} />
+      <Route path="/projetos" element={<Projetos />} />
+      <Route path="/carreiras" element={<Carreiras />} />
+      <Route path="/contato" element={<Contato />} />
+    </Routes>
   );
 }
 

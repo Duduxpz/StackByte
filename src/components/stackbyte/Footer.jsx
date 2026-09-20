@@ -1,14 +1,25 @@
 import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Globe, GitBranch } from 'lucide-react';
 
 const columns = [
   {
     title: 'Serviços',
-    links: ['Desenvolvimento', 'Modernização', 'Cloud & DevOps', 'Segurança'],
+    links: [
+      { label: 'Desenvolvimento', to: '/servicos/desenvolvimento' },
+      { label: 'Modernização', to: '/servicos/modernizacao' },
+      { label: 'Cloud & DevOps', to: '/servicos/cloud-devops' },
+      { label: 'Segurança', to: '/servicos/seguranca' },
+    ],
   },
   {
     title: 'Empresa',
-    links: ['Sobre', 'Projetos', 'Carreiras', 'Contato'],
+    links: [
+      { label: 'Sobre', to: '/sobre' },
+      { label: 'Projetos', to: '/projetos' },
+      { label: 'Carreiras', to: '/carreiras' },
+      { label: 'Contato', to: '/contato' },
+    ],
   },
 ];
 
@@ -29,30 +40,22 @@ export default function Footer() {
             </p>
             <div className="mt-6 flex gap-4 text-white/50">
               <a
-                href="https://wa.me/5531998062982"
+                href="https://www.linkedin.com"
                 target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="flex items-center justify-center transition-opacity hover:opacity-100"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="hover:text-white"
               >
-                <img
-                  src="/whatsappblack.png"
-                  alt="WhatsApp"
-                  className="h-[18px] w-[18px] object-contain brightness-0 invert opacity-70 transition-opacity hover:opacity-100"
-                />
+                <Globe size={18} />
               </a>
               <a
-                href="https://www.instagram.com/stackbyte.br"
+                href="https://github.com"
                 target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex items-center justify-center transition-opacity hover:opacity-100"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className="hover:text-white"
               >
-                <img
-                  src="/instagram.png"
-                  alt="Instagram"
-                  className="h-[18px] w-[18px] object-contain brightness-0 invert opacity-70 transition-opacity hover:opacity-100"
-                />
+                <GitBranch size={18} />
               </a>
             </div>
           </div>
@@ -62,10 +65,13 @@ export default function Footer() {
               <h4 className="font-['ClashDisplay-Regular'] text-sm font-medium text-white">{col.title}</h4>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="font-['ClashDisplay-Regular'] text-sm text-white/50 hover:text-white">
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    <Link
+                      to={link.to}
+                      className="font-['ClashDisplay-Regular'] text-sm text-white/50 hover:text-white"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { label: 'Serviços', href: '#servicos' },
-  { label: 'Projetos', href: '#projetos' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Contato', href: '#contato' },
+  { label: 'Serviços', href: '/#servicos' },
+  { label: 'Projetos', href: '/projetos' },
+  { label: 'Sobre', href: '/sobre' },
+  { label: 'Contato', href: '/contato' },
 ];
 
 export default function Navbar() {
@@ -44,11 +45,13 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <img
-          src="/Ativo 2@3x.png"
-          alt="StackByte"
-          className="h-7 w-auto object-contain md:h-8"
-        />
+        <Link to="/">
+          <img
+            src="/Ativo 2@3x.png"
+            alt="StackByte"
+            className="h-7 w-auto object-contain md:h-8"
+          />
+        </Link>
 
         <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">
           {links.map((link) => (
@@ -59,7 +62,7 @@ export default function Navbar() {
         </nav>
 
         <a
-          href="#contato"
+          href="/contato"
           className="hidden rounded-full bg-[#FD7B01] px-5 py-2 text-sm font-medium text-black transition-opacity hover:opacity-90 md:inline-block"
         >
           Fale com a gente
@@ -83,7 +86,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contato"
+            href="/contato"
             className="mt-2 w-fit rounded-full bg-[#FD7B01] px-5 py-2 font-medium text-black"
             onClick={() => setOpen(false)}
           >
