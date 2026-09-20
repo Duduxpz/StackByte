@@ -9,10 +9,11 @@ export default function CTA() {
           Conte um pouco sobre o seu sistema atual e retornamos com um diagnóstico inicial em até 48h.
         </p>
         <a
-          href="mailto:contato@stackbyte.com.br"
+          href="https://wa.me/5531998062982"
           className="rounded-full bg-black px-7 py-3 font-['ClashDisplay-Regular'] text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
           Falar com a StackByte
+            
         </a>
       </div>
     </section>
