@@ -36,10 +36,10 @@ function makeFaceCanvas(topColor, bottomColor, accent) {
 }
 
 function responsiveScale(width) {
-  if (width < 480) return 4.5;   // celular pequeno
-  if (width < 768) return 8.8;   // celular grande / tablet
-  if (width < 1200) return 12.2;  // notebook
-  return 12.4;                    // desktop grande
+  if (width < 480) return 6.5;   // celular pequeno
+  if (width < 768) return 12.0;   // celular grande / tablet
+  if (width < 1200) return 16.8;  // notebook
+  return 17.6;                    // desktop grande
 }
 
 /**
@@ -60,8 +60,8 @@ export default function Hero3DLogo({ className = '' }) {
     const scene = new THREE.Scene();
     scene.background = null;
 
-    const camera = new THREE.PerspectiveCamera(44, width / height, 0.1, 2000);
-    camera.position.set(0, 10, 1800);
+    const camera = new THREE.PerspectiveCamera(44, width / height, 0.1, 6000);
+    camera.position.set(0, 10, 2600);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
@@ -98,6 +98,9 @@ export default function Hero3DLogo({ className = '' }) {
       clearcoatRoughness: 0.02,
       envMapIntensity: 2.1,
       reflectivity: 1,
+      side: THREE.DoubleSide,
+      emissive: 0x3a1600,
+      emissiveIntensity: 0.08,
     });
 
     const logoGroup = new THREE.Group();
@@ -105,6 +108,7 @@ export default function Hero3DLogo({ className = '' }) {
       const geo = new THREE.ExtrudeGeometry(shapeFromPoints(pts), extrudeSettings);
       const mesh = new THREE.Mesh(geo, chromeMat);
       mesh.position.z = -extrudeSettings.depth / 2;
+      mesh.frustumCulled = false;
       logoGroup.add(mesh);
     });
     const sqGeo = new THREE.ExtrudeGeometry(shapeFromPoints(SQUARE), squareExtrude);
@@ -113,7 +117,27 @@ export default function Hero3DLogo({ className = '' }) {
     logoGroup.add(sqMesh);
 
     logoGroup.scale.setScalar(responsiveScale(width));
+    // Move the 3D mark slightly to the right inside the hero.
+    logoGroup.position.x = width < 768 ? 105 : 235;
     scene.add(logoGroup);
+
+    // Keep the entire 3D mark inside the canvas at every rotation angle.
+    // The old fixed camera distance was too close for the enlarged logo,
+    // causing it to be clipped as the object rotated.
+    const fitCamera = () => {
+      logoGroup.updateMatrixWorld(true);
+      const box = new THREE.Box3().setFromObject(logoGroup);
+      const sphere = box.getBoundingSphere(new THREE.Sphere());
+      const halfFov = THREE.MathUtils.degToRad(camera.fov * 0.5);
+      const distanceForHeight = sphere.radius / Math.tan(halfFov);
+      const distanceForWidth = sphere.radius / (Math.tan(halfFov) * camera.aspect);
+      const distance = Math.max(distanceForHeight, distanceForWidth) * 1.32;
+      camera.position.z = Math.max(1500, distance);
+      // Keep the logo visually to the right while leaving enough horizontal breathing room.
+      const viewTargetX = width < 768 ? 45 : 95;
+      camera.lookAt(viewTargetX, 0, 0);
+    };
+    fitCamera();
 
     // ---------- lighting ----------
     scene.add(new THREE.AmbientLight(0x1a1418, 0.5));
@@ -159,6 +183,8 @@ export default function Hero3DLogo({ className = '' }) {
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
       logoGroup.scale.setScalar(responsiveScale(width));
+      logoGroup.position.x = width < 768 ? 105 : 235;
+      fitCamera();
     };
     window.addEventListener('resize', onResize);
 

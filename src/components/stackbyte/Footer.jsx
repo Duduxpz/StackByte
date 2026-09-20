@@ -20,10 +20,10 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-16 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
           <div>
-            <span className="text-lg font-semibold text-white">
+            <span className="font-['Fraunces'] text-lg font-semibold text-white">
               Stack<span className="text-[#FD7B01]">Byte</span>
             </span>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
+            <p className="mt-4 max-w-xs font-['Inter'] text-sm leading-relaxed text-white/50">
               Engenharia de software e modernização de sistemas para empresas
               que não podem parar.
             </p>
@@ -39,11 +39,11 @@ export default function Footer() {
 
           {columns.map((col) => (
             <div key={col.title}>
-              <h4 className="text-sm font-medium text-white">{col.title}</h4>
+              <h4 className="font-['Inter'] text-sm font-medium text-white">{col.title}</h4>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-sm text-white/50 hover:text-white">
+                    <a href="#" className="font-['Inter'] text-sm text-white/50 hover:text-white">
                       {link}
                     </a>
                   </li>
@@ -53,7 +53,7 @@ export default function Footer() {
           ))}
 
           <div>
-            <h4 className="text-sm font-medium text-white">
+            <h4 className="font-['Inter'] text-sm font-medium text-white">
               Receba novidades técnicas
             </h4>
             <form
@@ -65,7 +65,7 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="w-full bg-transparent px-3 text-sm text-white placeholder-white/30 outline-none"
+                className="w-full bg-transparent px-3 font-['Inter'] text-sm text-white placeholder-white/30 outline-none"
               />
               <button
                 type="submit"
@@ -78,7 +78,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 py-8 text-xs text-white/30 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 py-8 font-['Inter'] text-xs text-white/30 md:flex-row">
           <span>© {new Date().getFullYear()} StackByte. Todos os direitos reservados.</span>
           <span>CNPJ 00.000.000/0001-00</span>
         </div>

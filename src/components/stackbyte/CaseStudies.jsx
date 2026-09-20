@@ -24,10 +24,10 @@ export default function CaseStudies() {
     <section id="projetos" className="bg-[#080505] py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-12 flex items-end justify-between gap-6">
-          <h2 className="text-3xl font-semibold text-white md:text-4xl">
+          <h2 className="font-['Fraunces'] text-3xl font-semibold text-white md:text-4xl">
             Projetos recentes
           </h2>
-          <a href="#contato" className="text-sm text-[#FD7B01] hover:underline">
+          <a href="#contato" className="font-['Inter'] text-sm text-[#FD7B01] hover:underline">
             Ver todos os projetos
           </a>
         </div>
@@ -40,15 +40,15 @@ export default function CaseStudies() {
                 i === 1 ? 'md:mt-8' : ''
               }`}
             >
-              <div className="text-3xl font-semibold text-[#FD7B01]">
+              <div className="font-['Fraunces'] text-3xl font-semibold text-[#FD7B01]">
                 {item.metric}
               </div>
-              <div className="mt-1 text-xs text-white/40">{item.metricLabel}</div>
+              <div className="mt-1 font-['Inter'] text-xs text-white/40">{item.metricLabel}</div>
 
-              <h3 className="mt-6 text-lg font-medium text-white">
+              <h3 className="mt-6 font-['Fraunces'] text-lg font-medium text-white">
                 {item.client}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/60">
+              <p className="mt-2 font-['Inter'] text-sm leading-relaxed text-white/60">
                 {item.summary}
               </p>
             </div>

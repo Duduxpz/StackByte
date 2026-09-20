@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const links = [
@@ -10,9 +10,39 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Mantém a navbar visível no topo da página.
+      if (currentScrollY <= 10) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        // Rolando para baixo: esconde.
+        setVisible(false);
+        setOpen(false);
+      } else {
+        // Rolando para cima: mostra.
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080505]/80 backdrop-blur-md">
+    <header
+      className={`fixed left-0 top-0 z-[9999] w-full border-b border-white/10 bg-[#080505]/90 backdrop-blur-md transition-transform duration-300 ease-out ${
+        visible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <img
           src="/Ativo 2@3x.png"
