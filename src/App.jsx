@@ -5,6 +5,7 @@ import CaseStudies from './components/stackbyte/CaseStudies';
 import Testimonials from './components/stackbyte/Testimonials';
 import CTA from './components/stackbyte/CTA';
 import Footer from './components/stackbyte/Footer';
+import FloatingWhatsApp from './components/stackbyte/Floatingwhatsapp';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Testimonials />
       <CTA />
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
