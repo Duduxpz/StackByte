@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Globe, GitBranch } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const columns = [
   {
@@ -28,11 +28,31 @@ export default function Footer() {
               que não podem parar.
             </p>
             <div className="mt-6 flex gap-4 text-white/50">
-              <a href="#" aria-label="LinkedIn" className="hover:text-white">
-                <Globe size={18} />
+              <a
+                href="https://wa.me/5531998062982"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="flex items-center justify-center transition-opacity hover:opacity-100"
+              >
+                <img
+                  src="/whatsappblack.png"
+                  alt="WhatsApp"
+                  className="h-[18px] w-[18px] object-contain brightness-0 invert opacity-70 transition-opacity hover:opacity-100"
+                />
               </a>
-              <a href="#" aria-label="GitHub" className="hover:text-white">
-                <GitBranch size={18} />
+              <a
+                href="https://www.instagram.com/stackbyte.br"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex items-center justify-center transition-opacity hover:opacity-100"
+              >
+                <img
+                  src="/instagram.png"
+                  alt="Instagram"
+                  className="h-[18px] w-[18px] object-contain brightness-0 invert opacity-70 transition-opacity hover:opacity-100"
+                />
               </a>
             </div>
           </div>
