@@ -28,7 +28,7 @@ export default function CaseStudies() {
             Projetos recentes
           </h2>
           <a href="#contato" className="font-['ClashDisplay-Regular'] text-sm text-[#FD7B01] hover:underline">
-            Ver todos os projetos
+            Venha junto com a StackByte e modernize a sua operação
           </a>
         </div>
 

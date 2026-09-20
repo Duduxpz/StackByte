@@ -4,7 +4,7 @@ const Hero3DLogo = lazy(() => import('./Hero3DLogo'));
 
 const stats = [
   { value: '87%', label: 'Uptime médio' },
-  { value: '17...', label: 'Sistemas entregues' },
+  { value: '+ 17', label: 'Sistemas entregues' },
   { value: '94%', label: 'Tempo de resposta' },
 ];
 

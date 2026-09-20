@@ -106,7 +106,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 py-8 font-['ClashDisplay-Regular'] text-xs text-white/30 md:flex-row">
           <span>© {new Date().getFullYear()} StackByte. Todos os direitos reservados.</span>
-          <span>CNPJ 00.000.000/0001-00</span>
+          
         </div>
       </div>
     </footer>
