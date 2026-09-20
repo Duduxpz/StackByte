@@ -1,18 +1,18 @@
 const cases = [
   {
-    client: 'Grupo Meridian',
+    client: 'Grupo FNOT',
     summary: 'Migração de sistema de faturamento legado para arquitetura em nuvem.',
     metric: '87%',
     metricLabel: 'tempo de processamento',
   },
   {
-    client: 'Vantix Logística',
-    summary: 'Plataforma de rastreamento em tempo real integrada a 4 sistemas de terceiros.',
+    client: 'Pecuaria',
+    summary: 'Plataforma de rastreamento em tempo real integrada a 4 sistemas de terceiros de gado completo.',
     metric: '99.98%',
     metricLabel: 'uptime em produção',
   },
   {
-    client: 'Norte Capital',
+    client: 'RP DESIGNER',
     summary: 'Reestruturação de infraestrutura e pipeline de deploy contínuo.',
     metric: '8x',
     metricLabel: 'mais rápido para lançar',
