@@ -144,7 +144,7 @@ export default function Hero3DLogo({ className = '' }) {
 
     logoGroup.scale.setScalar(responsiveScale(width));
     // Move the 3D mark slightly to the right inside the hero.
-    logoGroup.position.x = width < 768 ? 105 : 235;
+    logoGroup.position.x = width < 768 ? 0 : 235;
     scene.add(logoGroup);
 
     // Keep the entire 3D mark inside the canvas at every rotation angle.

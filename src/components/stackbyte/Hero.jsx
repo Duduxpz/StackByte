@@ -60,7 +60,7 @@ export default function Hero() {
               <div className="h-[500px] w-full animate-pulse rounded-full bg-[#FD7B01]/5 md:h-[680px]" />
             }
           >
-            <Hero3DLogo className="h-[500px] w-full md:h-[680px]" />
+            <Hero3DLogo className="h-[300px] w-full md:h-[680px]" />
           </Suspense>
         </div>
       </div>
