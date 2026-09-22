@@ -7,7 +7,7 @@ const servicesContent = {
     title: 'Desenvolvimento de software',
     eyebrow: 'Serviços — Engenharia',
     description:
-      'Construímos produtos e plataformas sob medida, do zero ao lançamento, com foco em performance, manutenibilidade e crescimento de longo prazo.',
+      'Construímos produtos e plataformas sob medida, do zero ao lançamento, com foco em performance, manutenibilidade e crescimento de longo prazo. Trabalhamos lado a lado com o seu time, unindo boas práticas de engenharia a decisões de arquitetura pensadas para durar — para que o que entregamos hoje continue sustentando o seu negócio daqui a anos.',
     highlights: [
       {
         title: 'Produtos web e mobile',
@@ -33,7 +33,7 @@ const servicesContent = {
     title: 'Modernização de sistemas legados',
     eyebrow: 'Serviços — Engenharia',
     description:
-      'Migramos sistemas antigos para arquiteturas atuais sem interromper a operação do seu negócio — passo a passo, com risco controlado.',
+      'Migramos sistemas antigos para arquiteturas atuais sem interromper a operação do seu negócio — passo a passo, com risco controlado. Cada etapa é planejada para reduzir dívida técnica, eliminar gargalos e preparar o sistema para crescer, sem parar as operações do dia a dia nem colocar em risco o que já funciona.',
     highlights: [
       {
         title: 'Migração sem downtime',
@@ -59,7 +59,7 @@ const servicesContent = {
     title: 'Cloud & DevOps',
     eyebrow: 'Serviços — Infraestrutura',
     description:
-      'Infraestrutura escalável, pipelines de CI/CD e monitoramento contínuo para operações confiáveis, do primeiro deploy ao milionésimo usuário.',
+      'Infraestrutura escalável, pipelines de CI/CD e monitoramento contínuo para operações confiáveis, do primeiro deploy ao milionésimo usuário. Automatizamos o que hoje é manual, tornamos cada ambiente replicável e auditável, e deixamos seu time pronto para operar com autonomia e confiança.',
     highlights: [
       {
         title: 'Infraestrutura como código',
@@ -85,7 +85,7 @@ const servicesContent = {
     title: 'Segurança da informação',
     eyebrow: 'Serviços — Segurança',
     description:
-      'Auditoria, hardening e práticas de segurança aplicadas em cada camada do sistema — antes que um incidente aconteça, não depois.',
+      'Auditoria, hardening e práticas de segurança aplicadas em cada camada do sistema — antes que um incidente aconteça, não depois. Mapeamos vulnerabilidades em código, infraestrutura e processos, aplicamos correções priorizadas por risco e ajudamos sua empresa a se manter em conformidade com exigências como a LGPD.',
     highlights: [
       {
         title: 'Auditoria de segurança',

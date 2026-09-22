@@ -40,7 +40,7 @@ export default function Footer() {
             </p>
             <div className="mt-6 flex items-center gap-4 text-white/50">
               <a
-                href="https://www.instagram.com/www.stackbyte.com.br/"
+                href="https://www.instagram.com/stackbyte.br/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
@@ -58,7 +58,7 @@ export default function Footer() {
                 <img src="/whatsappblack.png" alt="WhatsApp" className="h-[18px] w-[18px] object-contain brightness-0 invert" />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/Duduxpz"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
