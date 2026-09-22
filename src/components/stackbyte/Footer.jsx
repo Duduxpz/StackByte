@@ -35,8 +35,7 @@ export default function Footer() {
               Stack<span className="text-[#FD7B01]">Byte</span>
             </span>
             <p className="mt-4 max-w-xs font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/50">
-              Engenharia de software e modernização de sistemas para empresas
-              que não podem parar.
+              Sistemas que não param quando o seu negócio mais precisa deles.
             </p>
             <div className="mt-6 flex items-center gap-4 text-white/50">
               <a
@@ -115,7 +114,6 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 py-8 font-['ClashDisplay-Regular'] text-xs text-white/30 md:flex-row">
           <span>© {new Date().getFullYear()} StackByte. Todos os direitos reservados.</span>
-          
         </div>
       </div>
     </footer>

@@ -16,17 +16,16 @@ export default function Hero() {
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 md:grid-cols-2">
         <div>
           <span className="font-['ClashDisplay-Regular'] text-xs font-medium tracking-wide text-[#FD7B01]">
-            Engenharia de software &amp; sistemas
+            Engenharia de software para empresas que não podem parar
           </span>
 
           <h1 className="mt-4 font-['ClashDisplay-Regular'] text-4xl font-normal leading-[1.1] text-white md:text-5xl">
-  Sistemas que evoluem <em className="italic text-[#FD7B01]">junto</em> com sua operação.
-</h1>
+            Seu sistema está <em className="italic text-[#FD7B01]">travando o crescimento</em> da sua empresa?
+          </h1>
 
           <p className="mt-6 max-w-md font-['ClashDisplay-Regular'] text-base leading-relaxed text-white/60">
-            Desenvolvemos, modernizamos e integramos os sistemas que sustentam
-            o seu negócio — da arquitetura ao deploy, com engenharia sob medida
-            para cada operação.
+            Desenvolvemos, modernizamos e integramos sistemas sem parar a sua
+            operação. Diagnóstico técnico gratuito em até 48h — sem compromisso.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -34,13 +33,13 @@ export default function Hero() {
               href="#contato"
               className="rounded-full bg-[#FD7B01] px-6 py-3 font-['ClashDisplay-Regular'] text-sm font-medium text-black transition-opacity hover:opacity-90"
             >
-              Fale com um especialista
+              Quero um diagnóstico gratuito
             </a>
             <a
               href="#projetos"
               className="rounded-full border border-white/20 px-6 py-3 font-['ClashDisplay-Regular'] text-sm font-medium text-white transition-colors hover:border-white/40"
             >
-              Ver projetos
+              Ver casos reais
             </a>
           </div>
 
@@ -57,7 +56,7 @@ export default function Hero() {
         <div className="relative flex items-center justify-center">
           <Suspense
             fallback={
-              <div className="h-[500px] w-full animate-pulse rounded-full bg-[#FD7B01]/5 md:h-[680px]" />
+              <div className="h-[300px] w-full animate-pulse rounded-full bg-[#FD7B01]/5 md:h-[680px]" />
             }
           >
             <Hero3DLogo className="h-[300px] w-full md:h-[680px]" />

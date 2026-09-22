@@ -35,7 +35,7 @@ export default function WhatWeDo() {
     <section id="servicos" className="bg-[#080505] py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="mb-12 font-['ClashDisplay-Regular'] text-3xl font-semibold text-white md:text-4xl">
-          O que a StackByte faz
+          Problemas que resolvemos toda semana
         </h2>
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
