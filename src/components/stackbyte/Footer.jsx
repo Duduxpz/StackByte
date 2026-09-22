@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Globe, GitBranch } from 'lucide-react';
+import { ArrowRight, GitBranch } from 'lucide-react';
 
 const columns = [
   {
@@ -38,22 +38,31 @@ export default function Footer() {
               Engenharia de software e modernização de sistemas para empresas
               que não podem parar.
             </p>
-            <div className="mt-6 flex gap-4 text-white/50">
+            <div className="mt-6 flex items-center gap-4 text-white/50">
               <a
-                href="https://www.linkedin.com"
+                href="https://www.instagram.com/www.stackbyte.com.br/"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="LinkedIn"
-                className="hover:text-white"
+                aria-label="Instagram"
+                className="flex items-center justify-center text-white/50 transition-colors hover:text-white"
               >
-                <Globe size={18} />
+                <img src="/instagram.png" alt="Instagram" className="h-[18px] w-[18px] object-contain brightness-0 invert" />
+              </a>
+              <a
+                href="https://wa.me/5531998062982"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="flex items-center justify-center text-white/50 transition-colors hover:text-white"
+              >
+                <img src="/whatsappblack.png" alt="WhatsApp" className="h-[18px] w-[18px] object-contain brightness-0 invert" />
               </a>
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
-                className="hover:text-white"
+                className="flex items-center justify-center text-white/50 transition-colors hover:text-white"
               >
                 <GitBranch size={18} />
               </a>
