@@ -1,0 +1,19 @@
+# StackByte
+
+> A StackByte é uma empresa de desenvolvimento de software que constrói produtos digitais sob medida e moderniza sistemas legados para empresas, com foco em performance, segurança e continuidade de negócio.
+
+A StackByte atua em quatro frentes principais: desenvolvimento de software sob medida, modernização de sistemas legados, cloud & DevOps, e segurança da informação. A empresa trabalha lado a lado com o time do cliente, unindo boas práticas de engenharia a decisões de arquitetura pensadas para durar.
+
+## Serviços
+
+- [Desenvolvimento de software](https://www.stackbyte.com.br/servicos/desenvolvimento): construção de produtos web e mobile sob medida, do zero ao lançamento, com arquitetura pensada para crescimento de longo prazo.
+- [Modernização de sistemas legados](https://www.stackbyte.com.br/servicos/modernizacao): migração sem downtime, redução de dívida técnica e continuidade do negócio durante a transição.
+- [Cloud & DevOps](https://www.stackbyte.com.br/servicos/cloud-devops): infraestrutura como código, pipelines de CI/CD e observabilidade para operações confiáveis em escala.
+- [Segurança da informação](https://www.stackbyte.com.br/servicos/seguranca): auditoria de segurança, hardening de sistemas e conformidade.
+
+## Páginas
+
+- [Sobre](https://www.stackbyte.com.br/sobre): quem é a StackByte e como a empresa trabalha.
+- [Projetos](https://www.stackbyte.com.br/projetos): cases e projetos desenvolvidos pela StackByte.
+- [Carreiras](https://www.stackbyte.com.br/carreiras): oportunidades de trabalho na StackByte.
+- [Contato](https://www.stackbyte.com.br/contato): canais para falar com a equipe da StackByte.
