@@ -12,7 +12,7 @@ export default function Projetos() {
       <PageHero
         eyebrow="Empresa"
         title="Projetos"
-        description="Alguns dos sistemas que desenvolvemos, modernizamos e colocamos em produção — com resultado medido, não só entregue."
+        description="Conheça alguns dos sites que desenvolvemos para ajudar negócios a apresentar seu trabalho e fortalecer sua presença digital."
       />
 
       <CaseStudies />
