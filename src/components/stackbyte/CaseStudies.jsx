@@ -1,26 +1,30 @@
-import { ArrowUpRight, ExternalLink, MonitorSmartphone } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, ExternalLink, MonitorSmartphone, X } from 'lucide-react';
 
-// Add each public URL and a real screenshot here to turn these cards into
-// verifiable project references. Avoid publishing outcome metrics without a source.
+// Replace the illustrative cover and provisional copy with approved project assets
+// and details when they are available.
 const cases = [
   {
     client: 'Portfólio pessoal',
     type: 'Portfólio',
-    summary: 'Meu portfólio pessoal com apresentação dos meus trabalhos e projetos.',
+    summary: 'Uma página para reunir trabalhos, apresentar habilidades e facilitar o contato.',
+    details: 'Portfólio pessoal com uma apresentação profissional e uma vitrine para os projetos realizados.',
     url: 'https://duduxpz.github.io/portfolio/',
     image: '',
   },
   {
     client: 'Pecuaria',
     type: 'Website institucional',
-    summary: 'Presença digital organizada para facilitar o acesso às principais informações.',
+    summary: 'Apresentação de negócio do setor agropecuário com informações organizadas.',
+    details: 'Site institucional pensado para apresentar a empresa, seus serviços e formas de contato.',
     url: '',
     image: '',
   },
   {
     client: 'RP DESIGNER',
-    type: 'Website institucional',
-    summary: 'Uma página web pensada para apresentar o negócio com clareza em qualquer tela.',
+    type: 'Portfólio de design',
+    summary: 'Uma vitrine digital para destacar serviços e trabalhos de design.',
+    details: 'Portfólio visual para apresentar o trabalho de design, organizar os serviços e facilitar novos contatos.',
     url: '',
     image: '',
   },
@@ -38,43 +42,85 @@ function ProjectPreview({ item, index }) {
     );
   }
 
+  const mockups = [
+    {
+      page: 'bg-[#17100c] text-white',
+      accent: 'text-[#ff8a1d]',
+      label: 'DUDU / PORTFÓLIO',
+      headline: 'IDEIAS QUE\nVIRAM PROJETOS.',
+      cards: ['WEB', 'DESIGN', 'CÓDIGO'],
+    },
+    {
+      page: 'bg-[#142018] text-[#f5f2e8]',
+      accent: 'text-[#c5d58b]',
+      label: 'PECUÁRIA • DO CAMPO',
+      headline: 'TRADIÇÃO NO CAMPO.\nVISÃO DE FUTURO.',
+      cards: ['PRODUÇÃO', 'MANEJO', 'CONTATO'],
+    },
+    {
+      page: 'bg-[#f0eae0] text-[#171513]',
+      accent: 'text-[#b7492b]',
+      label: 'RP / DESIGN STUDIO',
+      headline: 'FORMAS QUE\nCONTAM HISTÓRIAS.',
+      cards: ['IDENTIDADE', 'DIGITAL', 'EDITORIAL'],
+    },
+  ];
+  const mockup = mockups[index];
+
   return (
-    <div className={`flex h-full flex-col justify-between overflow-hidden rounded-t-[inherit] bg-gradient-to-br ${index === 1 ? 'from-[#29190d] via-[#18110d] to-[#0e0b09]' : 'from-[#20150d] via-[#100e0d] to-[#0c0b0b]'} p-5`}>
-      <div className="flex items-center gap-2 border-b border-white/10 pb-3">
-        <span className="h-2 w-2 rounded-full bg-[#FD7B01]" />
-        <span className="h-2 w-2 rounded-full bg-white/20" />
-        <span className="h-2 w-2 rounded-full bg-white/20" />
-        <span className="ml-2 h-2 w-24 rounded-full bg-white/10" />
-        <MonitorSmartphone className="ml-auto h-4 w-4 text-white/40" aria-hidden="true" />
+    <div className={`relative flex h-full flex-col overflow-hidden rounded-t-[inherit] p-4 sm:p-5 ${mockup.page}`}>
+      <div className="flex items-center gap-1.5 border-b border-current/10 pb-2.5 opacity-70">
+        <span className="h-1.5 w-1.5 rounded-full bg-[#FD7B01]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-current/25" />
+        <span className="h-1.5 w-1.5 rounded-full bg-current/25" />
+        <span className="ml-2 h-1.5 w-16 rounded-full bg-current/10" />
+        <MonitorSmartphone className="ml-auto h-3.5 w-3.5" aria-hidden="true" />
       </div>
-      <div className="relative py-6">
-        <div className="pointer-events-none absolute -left-8 top-0 h-36 w-36 rounded-full bg-[#FD7B01]/15 blur-3xl" />
-        <span className="relative text-xs font-medium uppercase tracking-[0.22em] text-[#FD7B01]">Projeto {String(index + 1).padStart(2, '0')}</span>
-        <p className="relative mt-3 max-w-[14ch] font-['ClashDisplay-Regular'] text-3xl font-semibold leading-tight text-white sm:text-4xl">{item.client}</p>
+      <div className="relative flex flex-1 flex-col justify-center py-4">
+        <div className={`pointer-events-none absolute -right-10 top-4 h-32 w-32 rounded-full blur-3xl ${index === 1 ? 'bg-[#829b47]/25' : 'bg-[#FD7B01]/15'}`} />
+        <span className={`relative text-[9px] font-semibold uppercase tracking-[0.18em] ${mockup.accent}`}>{mockup.label}</span>
+        <p className="relative mt-2 whitespace-pre-line font-['ClashDisplay-Regular'] text-[clamp(1rem,2.4vw,2rem)] font-semibold leading-[1.02] tracking-tight">{mockup.headline}</p>
+        <div className="relative mt-4 flex flex-wrap gap-1.5">
+          {mockup.cards.map((card) => (
+            <span key={card} className={`rounded-full border border-current/15 px-2 py-1 text-[8px] font-medium tracking-wide opacity-75 ${mockup.accent}`}>{card}</span>
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-3 gap-2 border-t border-white/10 pt-3">
-        <span className="h-8 rounded-md bg-white/[0.06]" />
-        <span className="h-8 rounded-md bg-white/[0.06]" />
-        <span className="h-8 rounded-md bg-[#FD7B01]/20" />
+      <div className="flex items-center justify-between border-t border-current/10 pt-2 text-[8px] uppercase tracking-[0.16em] opacity-45">
+        <span>Prévia ilustrativa</span>
+        <span>{String(index + 1).padStart(2, '0')} / 03</span>
       </div>
     </div>
   );
 }
 
 export default function CaseStudies() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  useEffect(() => {
+    if (!selectedProject) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setSelectedProject(null);
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [selectedProject]);
+
   return (
     <section id="projetos" className="bg-[#080505] py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-10 max-w-2xl">
+        <div className="mb-10">
           <span className="font-['ClashDisplay-Regular'] text-xs font-medium uppercase tracking-[0.2em] text-[#FD7B01]">Portfólio</span>
-          <div className="mt-3 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div className="mt-3 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="font-['ClashDisplay-Regular'] text-3xl font-semibold text-white md:text-4xl">Projetos recentes</h2>
               <p className="mt-3 max-w-xl font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/55 md:text-base">
                 Projetos web desenvolvidos com foco em apresentar marcas e trabalhos com clareza e profissionalismo.
               </p>
             </div>
-            <a href="#contato" className="shrink-0 font-['ClashDisplay-Regular'] text-sm text-[#FD7B01] transition-colors hover:text-white">
+            <a href="#contato" className="shrink-0 font-['ClashDisplay-Regular'] text-sm text-[#FD7B01] transition-colors hover:text-white md:ml-auto">
               Vamos conversar <ArrowUpRight className="ml-1 inline h-4 w-4" aria-hidden="true" />
             </a>
           </div>
@@ -83,9 +129,17 @@ export default function CaseStudies() {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {cases.map((item, index) => (
             <article key={item.client} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] transition duration-300 hover:-translate-y-1 hover:border-[#FD7B01]/40 hover:bg-white/[0.04]">
-              <div className="aspect-[1.55] overflow-hidden rounded-t-[inherit] border-b border-white/10">
+              <button
+                type="button"
+                onClick={() => setSelectedProject(item)}
+                aria-label={`Ver detalhes do projeto ${item.client}`}
+                className="relative block aspect-[1.55] w-full overflow-hidden rounded-t-[inherit] border-b border-white/10 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FD7B01]"
+              >
                 <ProjectPreview item={item} index={index} />
-              </div>
+                <span className="absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/70 px-3 py-1.5 font-['ClashDisplay-Regular'] text-xs text-white opacity-100 transition group-hover:border-[#FD7B01]/70 group-hover:text-[#ffac5c] sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
+                  Ver detalhes <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" aria-hidden="true" />
+                </span>
+              </button>
               <div className="p-5">
                 <div className="flex items-center justify-between gap-3">
                   <span className="rounded-full border border-[#FD7B01]/25 bg-[#FD7B01]/[0.08] px-3 py-1 font-['ClashDisplay-Regular'] text-[11px] text-[#ffac5c]">{item.type}</span>
@@ -93,18 +147,60 @@ export default function CaseStudies() {
                 </div>
                 <h3 className="mt-4 font-['ClashDisplay-Regular'] text-xl font-medium text-white">{item.client}</h3>
                 <p className="mt-2 min-h-[3rem] font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/55">{item.summary}</p>
-                {item.url ? (
-                  <a href={item.url} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 font-['ClashDisplay-Regular'] text-sm text-[#FD7B01] hover:text-white">
-                    Visitar site <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                ) : (
-                  <span className="mt-5 inline-flex items-center gap-2 font-['ClashDisplay-Regular'] text-sm text-white/30">Link do projeto pendente</span>
-                )}
+                <button type="button" onClick={() => setSelectedProject(item)} className="mt-5 inline-flex items-center gap-2 font-['ClashDisplay-Regular'] text-sm text-[#FD7B01] hover:text-white focus:outline-none focus-visible:underline">
+                  Ver detalhes <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </button>
               </div>
             </article>
           ))}
         </div>
       </div>
+
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-sm"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setSelectedProject(null);
+          }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-detail-title"
+            className="relative my-auto grid w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-[#100d0b] shadow-2xl md:grid-cols-[1.2fr_0.8fr]"
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedProject(null)}
+              aria-label="Fechar detalhes do projeto"
+              className="absolute right-3 top-3 z-10 rounded-full border border-white/15 bg-black/70 p-2 text-white transition hover:border-[#FD7B01] hover:text-[#FD7B01] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FD7B01]"
+            >
+              <X className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <div className="min-h-64 aspect-[1.35] overflow-hidden bg-[#0c0b0b] md:aspect-auto">
+              <ProjectPreview item={selectedProject} index={cases.indexOf(selectedProject)} />
+            </div>
+            <div className="flex flex-col justify-center p-6 md:p-8">
+              <span className="w-fit rounded-full border border-[#FD7B01]/25 bg-[#FD7B01]/[0.08] px-3 py-1 font-['ClashDisplay-Regular'] text-xs text-[#ffac5c]">
+                {selectedProject.type}
+              </span>
+              <h3 id="project-detail-title" className="mt-4 font-['ClashDisplay-Regular'] text-2xl font-semibold text-white md:text-3xl">
+                {selectedProject.client}
+              </h3>
+              <p className="mt-3 font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/60">
+                {selectedProject.details}
+              </p>
+              {selectedProject.url ? (
+                <a href={selectedProject.url} target="_blank" rel="noreferrer" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#FD7B01] px-5 py-3 font-['ClashDisplay-Regular'] text-sm font-medium text-black transition hover:bg-[#ff9a3d]">
+                  Visitar site <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ) : (
+                <p className="mt-6 font-['ClashDisplay-Regular'] text-sm text-white/35">Endereço do projeto não informado.</p>
+              )}
+            </div>
+          </section>
+        </div>
+      )}
     </section>
   );
 }
