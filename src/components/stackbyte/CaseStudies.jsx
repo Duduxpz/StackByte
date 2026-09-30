@@ -1,96 +1,42 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, ExternalLink, MonitorSmartphone, X } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, X } from 'lucide-react';
 
-// Replace the illustrative cover and provisional copy with approved project assets
-// and details when they are available.
+const portfolioUrl = 'https://duduxpz.github.io/portfolio/';
 const cases = [
   {
-    client: 'Portfólio pessoal',
-    type: 'Portfólio',
-    summary: 'Uma página para reunir trabalhos, apresentar habilidades e facilitar o contato.',
-    details: 'Portfólio pessoal com uma apresentação profissional e uma vitrine para os projetos realizados.',
-    url: 'https://duduxpz.github.io/portfolio/',
-    image: '',
+    client: 'StackByte',
+    type: 'Desenvolvimento web',
+    summary: 'Site para desenvolvimento e tecnologias de sistemas.',
+    details: 'Projeto apresentado no portfólio pessoal como site de desenvolvimento e tecnologias. A captura mostra a identidade visual e a apresentação do trabalho.',
+    url: portfolioUrl,
+    image: '/projects/stackbyte.png',
   },
   {
-    client: 'Pecuaria',
-    type: 'Website institucional',
-    summary: 'Apresentação de negócio do setor agropecuário com informações organizadas.',
-    details: 'Site institucional pensado para apresentar a empresa, seus serviços e formas de contato.',
-    url: '',
-    image: '',
+    client: 'PRIVATE MODE',
+    type: 'Evento · UDI/MG',
+    summary: 'Site para uma festa eletrônica em Uberlândia, Minas Gerais.',
+    details: 'Projeto de página para evento, apresentado no portfólio pessoal. A captura original mostra a proposta visual usada para divulgar a festa.',
+    url: portfolioUrl,
+    image: '/projects/private-mode.png',
   },
   {
-    client: 'RP DESIGNER',
-    type: 'Portfólio de design',
-    summary: 'Uma vitrine digital para destacar serviços e trabalhos de design.',
-    details: 'Portfólio visual para apresentar o trabalho de design, organizar os serviços e facilitar novos contatos.',
-    url: '',
-    image: '',
+    client: 'Checkout',
+    type: 'E-commerce · UI/UX',
+    summary: 'Fluxo de finalização de compra para uma loja virtual.',
+    details: 'Projeto de checkout para e-commerce, apresentado no portfólio pessoal. A captura mostra as telas do fluxo de compra.',
+    url: portfolioUrl,
+    image: '/projects/checkout.png',
   },
 ];
 
-function ProjectPreview({ item, index }) {
-  if (item.image) {
-    return (
-      <img
-        src={item.image}
-        alt={`Captura de tela do site ${item.client}`}
-        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-        loading="lazy"
-      />
-    );
-  }
-
-  const mockups = [
-    {
-      page: 'bg-[#17100c] text-white',
-      accent: 'text-[#ff8a1d]',
-      label: 'DUDU / PORTFÓLIO',
-      headline: 'IDEIAS QUE\nVIRAM PROJETOS.',
-      cards: ['WEB', 'DESIGN', 'CÓDIGO'],
-    },
-    {
-      page: 'bg-[#142018] text-[#f5f2e8]',
-      accent: 'text-[#c5d58b]',
-      label: 'PECUÁRIA • DO CAMPO',
-      headline: 'TRADIÇÃO NO CAMPO.\nVISÃO DE FUTURO.',
-      cards: ['PRODUÇÃO', 'MANEJO', 'CONTATO'],
-    },
-    {
-      page: 'bg-[#f0eae0] text-[#171513]',
-      accent: 'text-[#b7492b]',
-      label: 'RP / DESIGN STUDIO',
-      headline: 'FORMAS QUE\nCONTAM HISTÓRIAS.',
-      cards: ['IDENTIDADE', 'DIGITAL', 'EDITORIAL'],
-    },
-  ];
-  const mockup = mockups[index];
-
+function ProjectPreview({ item }) {
   return (
-    <div className={`relative flex h-full flex-col overflow-hidden rounded-t-[inherit] p-4 sm:p-5 ${mockup.page}`}>
-      <div className="flex items-center gap-1.5 border-b border-current/10 pb-2.5 opacity-70">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#FD7B01]" />
-        <span className="h-1.5 w-1.5 rounded-full bg-current/25" />
-        <span className="h-1.5 w-1.5 rounded-full bg-current/25" />
-        <span className="ml-2 h-1.5 w-16 rounded-full bg-current/10" />
-        <MonitorSmartphone className="ml-auto h-3.5 w-3.5" aria-hidden="true" />
-      </div>
-      <div className="relative flex flex-1 flex-col justify-center py-4">
-        <div className={`pointer-events-none absolute -right-10 top-4 h-32 w-32 rounded-full blur-3xl ${index === 1 ? 'bg-[#829b47]/25' : 'bg-[#FD7B01]/15'}`} />
-        <span className={`relative text-[9px] font-semibold uppercase tracking-[0.18em] ${mockup.accent}`}>{mockup.label}</span>
-        <p className="relative mt-2 whitespace-pre-line font-['ClashDisplay-Regular'] text-[clamp(1rem,2.4vw,2rem)] font-semibold leading-[1.02] tracking-tight">{mockup.headline}</p>
-        <div className="relative mt-4 flex flex-wrap gap-1.5">
-          {mockup.cards.map((card) => (
-            <span key={card} className={`rounded-full border border-current/15 px-2 py-1 text-[8px] font-medium tracking-wide opacity-75 ${mockup.accent}`}>{card}</span>
-          ))}
-        </div>
-      </div>
-      <div className="flex items-center justify-between border-t border-current/10 pt-2 text-[8px] uppercase tracking-[0.16em] opacity-45">
-        
-        <span>{String(index + 1).padStart(2, '0')} / 03</span>
-      </div>
-    </div>
+    <img
+      src={item.image}
+      alt={`Captura real do projeto ${item.client}`}
+      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+      loading="lazy"
+    />
   );
 }
 
@@ -135,7 +81,7 @@ export default function CaseStudies() {
                 aria-label={`Ver detalhes do projeto ${item.client}`}
                 className="relative block aspect-[1.55] w-full overflow-hidden rounded-t-[inherit] border-b border-white/10 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FD7B01]"
               >
-                <ProjectPreview item={item} index={index} />
+                <ProjectPreview item={item} />
                 <span className="absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/70 px-3 py-1.5 font-['ClashDisplay-Regular'] text-xs text-white opacity-100 transition group-hover:border-[#FD7B01]/70 group-hover:text-[#ffac5c] sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
                   Ver detalhes <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" aria-hidden="true" />
                 </span>
@@ -178,7 +124,7 @@ export default function CaseStudies() {
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
             <div className="min-h-64 aspect-[1.35] overflow-hidden bg-[#0c0b0b] md:aspect-auto">
-              <ProjectPreview item={selectedProject} index={cases.indexOf(selectedProject)} />
+              <ProjectPreview item={selectedProject} />
             </div>
             <div className="flex flex-col justify-center p-6 md:p-8">
               <span className="w-fit rounded-full border border-[#FD7B01]/25 bg-[#FD7B01]/[0.08] px-3 py-1 font-['ClashDisplay-Regular'] text-xs text-[#ffac5c]">
@@ -192,10 +138,10 @@ export default function CaseStudies() {
               </p>
               {selectedProject.url ? (
                 <a href={selectedProject.url} target="_blank" rel="noreferrer" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#FD7B01] px-5 py-3 font-['ClashDisplay-Regular'] text-sm font-medium text-black transition hover:bg-[#ff9a3d]">
-                  Visitar site <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  Ver no portfólio <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
               ) : (
-                <p className="mt-6 font-['ClashDisplay-Regular'] text-sm text-white/35">Endereço do projeto não informado.</p>
+                <p className="mt-6 font-['ClashDisplay-Regular'] text-sm text-white/35">Consulte a captura do projeto.</p>
               )}
             </div>
           </section>
