@@ -5,13 +5,13 @@ const testimonials = [
     text: 'A StackByte entendeu nosso sistema legado melhor do que nossa própria equipe interna.',
     highlight: 'Entregaram no prazo e sem downtime.',
     name: 'Caio Lopes',
-    city: 'Divinópolis, MG',
+    city: 'Uberlandia, MG',
   },
   {
     text: 'Precisávamos de alguém que realmente entendesse o que nossa empresa precisava.',
     highlight: 'A StackByte transformou nossa ideia em uma solução muito mais completa.',
     name: 'Lucas Almeida',
-    city: 'Uberlândia, MG',
+    city: 'Divinopolis, MG',
   },
   {
     text: 'O projeto começou como uma necessidade simples, mas a equipe conseguiu enxergar muito além.',
@@ -23,19 +23,19 @@ const testimonials = [
     text: 'Tínhamos um processo totalmente manual e cheio de problemas.',
     highlight: 'Hoje conseguimos controlar tudo de forma muito mais rápida e organizada.',
     name: 'Rafael Costa',
-    city: 'Uberaba, MG',
+    city: 'São José dos Campos, SP',
   },
   {
     text: 'Desde o primeiro contato ficou claro que a StackByte não queria apenas vender um site.',
     highlight: 'Eles realmente entenderam nosso negócio antes de começar o projeto.',
     name: 'Matheus Oliveira',
-    city: 'Araxá, MG',
+    city: 'Anápolis, GO',
   },
   {
     text: 'Nossa antiga plataforma já não acompanhava o crescimento da empresa.',
     highlight: 'A nova estrutura ficou muito mais rápida, moderna e escalável.',
     name: 'Pedro Henrique',
-    city: 'Patos de Minas, MG',
+    city: 'Ponta Grossa, PR',
   },
   {
     text: 'O atendimento foi um dos maiores diferenciais durante todo o projeto.',
@@ -47,13 +47,13 @@ const testimonials = [
     text: 'Precisávamos modernizar nossa presença digital sem perder a identidade da empresa.',
     highlight: 'A StackByte conseguiu equilibrar tecnologia, design e nossa essência.',
     name: 'Felipe Rocha',
-    city: 'Araguari, MG',
+    city: 'Florianopolis, SC',
   },
   {
     text: 'O sistema antigo apresentava problemas que já faziam parte da nossa rotina.',
     highlight: 'Depois do projeto, nossa operação ficou muito mais estável.',
     name: 'André Silva',
-    city: 'Contagem, MG',
+    city: 'Luziâna, MG',
   },
   {
     text: 'Entramos no projeto com uma ideia e várias dúvidas sobre como colocar tudo em prática.',
@@ -95,7 +95,7 @@ const testimonials = [
     text: 'A comunicação durante o desenvolvimento fez toda diferença.',
     highlight: 'Sabíamos exatamente o que estava acontecendo em cada etapa.',
     name: 'Vinícius Santos',
-    city: 'Lavras, MG',
+    city: 'Fazenda São Gabriel, MT',
   },
   {
     text: 'Não queríamos apenas algo bonito, precisávamos de uma solução que funcionasse de verdade.',
