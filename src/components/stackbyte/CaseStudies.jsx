@@ -87,7 +87,7 @@ function ProjectPreview({ item, index }) {
         </div>
       </div>
       <div className="flex items-center justify-between border-t border-current/10 pt-2 text-[8px] uppercase tracking-[0.16em] opacity-45">
-        <span>Prévia ilustrativa</span>
+        
         <span>{String(index + 1).padStart(2, '0')} / 03</span>
       </div>
     </div>
