@@ -5,110 +5,109 @@ const testimonials = [
     text: 'A StackByte entendeu nosso sistema legado melhor do que nossa própria equipe interna.',
     highlight: 'Entregaram no prazo e sem downtime.',
     name: 'Caio Lopes',
-    company: 'Fnot, Caio Finotti | Branding',
-    image: '/DSC_6854.jpg',
+    city: 'Divinópolis, MG',
   },
   {
     text: 'Precisávamos de alguém que realmente entendesse o que nossa empresa precisava.',
     highlight: 'A StackByte transformou nossa ideia em uma solução muito mais completa.',
     name: 'Lucas Almeida',
-    image: '/public/usuario.png',
+    city: 'Uberlândia, MG',
   },
   {
     text: 'O projeto começou como uma necessidade simples, mas a equipe conseguiu enxergar muito além.',
     highlight: 'O resultado final superou completamente nossas expectativas.',
     name: 'Gabriel Martins',
-    image: '/public/usuario.png',
+    city: 'Belo Horizonte, MG',
   },
   {
     text: 'Tínhamos um processo totalmente manual e cheio de problemas.',
     highlight: 'Hoje conseguimos controlar tudo de forma muito mais rápida e organizada.',
     name: 'Rafael Costa',
-    image: '/public/usuario.png',
+    city: 'Uberaba, MG',
   },
   {
     text: 'Desde o primeiro contato ficou claro que a StackByte não queria apenas vender um site.',
     highlight: 'Eles realmente entenderam nosso negócio antes de começar o projeto.',
     name: 'Matheus Oliveira',
-    image: '/public/usuario.png',
+    city: 'Araxá, MG',
   },
   {
     text: 'Nossa antiga plataforma já não acompanhava o crescimento da empresa.',
     highlight: 'A nova estrutura ficou muito mais rápida, moderna e escalável.',
     name: 'Pedro Henrique',
-    image: '/public/usuario.png',
+    city: 'Patos de Minas, MG',
   },
   {
     text: 'O atendimento foi um dos maiores diferenciais durante todo o projeto.',
     highlight: 'Sempre tivemos retorno rápido e muita clareza em cada etapa.',
     name: 'João Victor',
-    image: '/public/usuario.png',
+    city: 'Ituiutaba, MG',
   },
   {
     text: 'Precisávamos modernizar nossa presença digital sem perder a identidade da empresa.',
     highlight: 'A StackByte conseguiu equilibrar tecnologia, design e nossa essência.',
     name: 'Felipe Rocha',
-    image: '/public/usuario.png',
+    city: 'Araguari, MG',
   },
   {
     text: 'O sistema antigo apresentava problemas que já faziam parte da nossa rotina.',
     highlight: 'Depois do projeto, nossa operação ficou muito mais estável.',
     name: 'André Silva',
-    image: '/public/usuario.png',
+    city: 'Contagem, MG',
   },
   {
     text: 'Entramos no projeto com uma ideia e várias dúvidas sobre como colocar tudo em prática.',
     highlight: 'A equipe ajudou a transformar tudo isso em um produto funcional.',
     name: 'Bruno Mendes',
-    image: '/public/usuario.png',
+    city: 'Nova Serrana, MG',
   },
   {
     text: 'O que mais chamou nossa atenção foi a preocupação com cada detalhe.',
     highlight: 'O resultado ficou muito mais profissional do que imaginávamos.',
     name: 'Thiago Martins',
-    image: '/public/usuario.png',
+    city: 'Itaúna, MG',
   },
   {
     text: 'Precisávamos de uma solução que pudesse crescer junto com nossa empresa.',
     highlight: 'A arquitetura desenvolvida deixou tudo preparado para os próximos passos.',
     name: 'Henrique Souza',
-    image: '/public/usuario.png',
+    city: 'Formiga, MG',
   },
   {
     text: 'Nossa experiência anterior com desenvolvimento não tinha sido muito boa.',
     highlight: 'A StackByte mudou completamente nossa visão sobre esse tipo de projeto.',
     name: 'Diego Ferreira',
-    image: '/public/usuario.png',
+    city: 'Carmo do Cajuru, MG',
   },
   {
     text: 'O projeto precisava ser entregue dentro de um prazo bastante apertado.',
     highlight: 'Mesmo assim, a qualidade não ficou em segundo plano.',
     name: 'Gustavo Ribeiro',
-    image: '/public/usuario.png',
+    city: 'Pará de Minas, MG',
   },
   {
     text: 'Queríamos uma experiência digital que realmente representasse o nível da nossa empresa.',
     highlight: 'O resultado trouxe exatamente essa percepção para nossos clientes.',
     name: 'Leonardo Alves',
-    image: '/public/usuario.png',
+    city: 'Sete Lagoas, MG',
   },
   {
     text: 'A comunicação durante o desenvolvimento fez toda diferença.',
     highlight: 'Sabíamos exatamente o que estava acontecendo em cada etapa.',
     name: 'Vinícius Santos',
-    image: '/public/usuario.png',
+    city: 'Lavras, MG',
   },
   {
     text: 'Não queríamos apenas algo bonito, precisávamos de uma solução que funcionasse de verdade.',
     highlight: 'A StackByte entregou os dois: experiência visual e tecnologia.',
     name: 'Arthur Lima',
-    image: '/public/usuario.png',
+    city: 'Uberlândia, MG',
   },
   {
     text: 'Depois que colocamos o novo projeto no ar, percebemos imediatamente a diferença.',
     highlight: 'Nossa operação ficou mais simples e nossos clientes tiveram uma experiência melhor.',
     name: 'Marcelo Castro',
-    image: '/public/usuario.png',
+    city: 'Divinópolis, MG',
   },
 ];
 
@@ -162,27 +161,14 @@ export default function Testimonials() {
           </p>
 
           {/* Cliente */}
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <div className="h-10 w-10 overflow-hidden rounded-full bg-white/5">
-              <img
-                src={testimonial.image}
-                alt={testimonial.name}
-                className="h-full w-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
-              />
-            </div>
-
-            <div className="text-left">
+          <div className="mt-8 flex flex-col items-center">
               <div className="font-['ClashDisplay-Regular'] text-sm font-medium text-white">
                 {testimonial.name}
               </div>
 
-              <div className="font-['ClashDisplay-Regular'] text-xs text-white/40">
-                {testimonial.company}
+              <div className="mt-1 font-['ClashDisplay-Regular'] text-xs text-white/40">
+                {testimonial.city}
               </div>
-            </div>
           </div>
         </div>
 
