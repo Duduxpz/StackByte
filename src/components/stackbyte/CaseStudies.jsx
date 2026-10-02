@@ -7,15 +7,15 @@ const cases = [
     client: 'Portfólio pessoal',
     type: 'Portfólio',
     summary: 'Meu portfólio pessoal com apresentação e projetos realizados.',
-    details: 'Página pessoal para apresentar meu trabalho, minhas habilidades e projetos.',
+    details: 'Página pessoal para apresentar meu trabalho do CEO da StackByte, mostrando alguns projetos que ele ja fez e um pouco de sua historia.',
     url: portfolioUrl,
     image: '/projects/portfolio.png',
   },
   {
-    client: 'Pecuaria',
+    client: 'Agropecuária',
     type: 'Website institucional',
     summary: 'Apresentação de um sistema de gestão para o setor agropecuário.',
-    details: 'Projeto voltado à gestão de informações e decisões no campo, conforme a captura enviada.',
+    details: 'Projeto dedicado para rastreio de gado (vacinas, balanhas, etc...) com isso isso ajudando o pasto da melhor forma possivel! O SITE SE ENCONTRA EM DESENVOLVIMENTO.',
     url: '',
     image: '/projects/pecuaria.png',
   },
@@ -23,7 +23,7 @@ const cases = [
     client: 'RP DESIGNER',
     type: 'Portfólio de design',
     summary: 'Uma vitrine digital para destacar serviços e trabalhos de design.',
-    details: 'Projeto de apresentação visual para trabalhos de identidade, digital e editorial.',
+    details: 'Projeto de apresentação visual para trabalhos de identidade, digital e editorial, com vendas de produtos personalisado (Agenda, Cardeneta, Designer Personalizado com sua cara e com profissionalismo), Site segue em produção neste momento.',
     url: '',
     image: '/projects/rp-designer.png',
   },
@@ -141,7 +141,7 @@ export default function CaseStudies() {
                   Ver no portfólio <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 </a>
               ) : (
-                <p className="mt-6 font-['ClashDisplay-Regular'] text-sm text-white/35">Consulte a captura do projeto.</p>
+                <p className="mt-6 font-['ClashDisplay-Regular'] text-sm text-white/35">Aguarde projeto em desenvolvimento.</p>
               )}
             </div>
           </section>
