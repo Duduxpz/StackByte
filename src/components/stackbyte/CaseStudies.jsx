@@ -1,152 +1,147 @@
-import { useEffect, useState } from 'react';
-import { ArrowUpRight, ExternalLink, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { MessageCircle, Send, X } from 'lucide-react';
 
-const portfolioUrl = 'https://duduxpz.github.io/portfolio/';
-const cases = [
-  {
-    client: 'Portfólio pessoal',
-    type: 'Portfólio',
-    summary: 'Meu portfólio pessoal com apresentação e projetos realizados.',
-    details: 'Página pessoal para apresentar meu trabalho do CEO da StackByte, mostrando alguns projetos que ele ja fez e um pouco de sua historia.',
-    url: portfolioUrl,
-    image: '/projects/portfolio.png',
-  },
-  {
-    client: 'Agropecuária',
-    type: 'Website institucional',
-    summary: 'Apresentação de um sistema de gestão para o setor agropecuário.',
-    details: 'Projeto dedicado para rastreio de gado (vacinas, balanhas, etc...) com isso isso ajudando o pasto da melhor forma possivel! O SITE SE ENCONTRA EM DESENVOLVIMENTO.',
-    url: '',
-    image: '/projects/pecuaria.png',
-  },
-  {
-    client: 'RP DESIGNER',
-    type: 'Portfólio de design',
-    summary: 'Uma vitrine digital para destacar serviços e trabalhos de design.',
-    details: 'Projeto de apresentação visual para trabalhos de identidade, digital e editorial, com vendas de produtos personalisado (Agenda, Cardeneta, Designer Personalizado com sua cara e com profissionalismo), Site segue em produção neste momento.',
-    url: '',
-    image: '/projects/rp-designer.png',
-  },
-];
+const WHATSAPP_NUMBER = '5531998062982';
 
-function ProjectPreview({ item }) {
-  return (
-    <img
-      src={item.image}
-      alt={`Captura real do projeto ${item.client}`}
-      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-      loading="lazy"
-    />
-  );
-}
+const DEFAULT_MESSAGE =
+  'Olá! Vim pelo site da StackByte e gostaria de conversar sobre um projeto.';
 
-export default function CaseStudies() {
-  const [selectedProject, setSelectedProject] = useState(null);
+export default function FloatingWhatsApp() {
+  const [open, setOpen] = useState(false);
+
+  const containerRef = useRef(null);
+
+  const whatsappLink =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      DEFAULT_MESSAGE,
+    )}`;
 
   useEffect(() => {
-    if (!selectedProject) return undefined;
-
-    const closeOnEscape = (event) => {
-      if (event.key === 'Escape') setSelectedProject(null);
+    const handleOutsideClick = (event) => {
+      if (
+        !containerRef.current?.contains(
+          event.target,
+        )
+      ) {
+        setOpen(false);
+      }
     };
 
-    window.addEventListener('keydown', closeOnEscape);
-    return () => window.removeEventListener('keydown', closeOnEscape);
-  }, [selectedProject]);
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener(
+      'pointerdown',
+      handleOutsideClick,
+    );
+
+    document.addEventListener(
+      'keydown',
+      handleEscape,
+    );
+
+    return () => {
+      document.removeEventListener(
+        'pointerdown',
+        handleOutsideClick,
+      );
+
+      document.removeEventListener(
+        'keydown',
+        handleEscape,
+      );
+    };
+  }, []);
 
   return (
-    <section id="projetos" className="bg-[#080505] py-20 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-10">
-          <span className="font-['ClashDisplay-Regular'] text-xs font-medium uppercase tracking-[0.2em] text-[#FD7B01]">Portfólio</span>
-          <div className="mt-3 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="font-['ClashDisplay-Regular'] text-3xl font-semibold text-white md:text-4xl">Projetos recentes</h2>
-              <p className="mt-3 max-w-xl font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/55 md:text-base">
-                Projetos web desenvolvidos com foco em apresentar marcas e trabalhos com clareza e profissionalismo.
-              </p>
+    <div
+      ref={containerRef}
+      className="fixed bottom-5 right-5 z-[80] sm:bottom-6 sm:right-6"
+      style={{
+        paddingBottom:
+          'env(safe-area-inset-bottom)',
+      }}
+    >
+      {open && (
+        <div
+          className="mb-3 w-[calc(100vw-2.5rem)] max-w-[320px] origin-bottom-right animate-[scaleIn_.18s_ease-out] overflow-hidden rounded-2xl border border-white/10 bg-[#100d0b]/95 p-4 shadow-[0_25px_80px_rgba(0,0,0,.45)] backdrop-blur-xl"
+          role="dialog"
+          aria-label="Contato via WhatsApp"
+        >
+          <div className="flex items-start gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#25D366]/15 text-[#25D366]">
+              <MessageCircle
+                size={20}
+                strokeWidth={2}
+              />
             </div>
-            <a href="#contato" className="shrink-0 font-['ClashDisplay-Regular'] text-sm text-[#FD7B01] transition-colors hover:text-white md:ml-auto">
-              Vamos conversar <ArrowUpRight className="ml-1 inline h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          {cases.map((item, index) => (
-            <article key={item.client} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] transition duration-300 hover:-translate-y-1 hover:border-[#FD7B01]/40 hover:bg-white/[0.04]">
-              <button
-                type="button"
-                onClick={() => setSelectedProject(item)}
-                aria-label={`Ver detalhes do projeto ${item.client}`}
-                className="relative block aspect-[1.55] w-full overflow-hidden rounded-t-[inherit] border-b border-white/10 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FD7B01]"
-              >
-                <ProjectPreview item={item} />
-                <span className="absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/70 px-3 py-1.5 font-['ClashDisplay-Regular'] text-xs text-white opacity-100 transition group-hover:border-[#FD7B01]/70 group-hover:text-[#ffac5c] sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
-                  Ver detalhes <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" aria-hidden="true" />
-                </span>
-              </button>
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full border border-[#FD7B01]/25 bg-[#FD7B01]/[0.08] px-3 py-1 font-['ClashDisplay-Regular'] text-[11px] text-[#ffac5c]">{item.type}</span>
-                  <span className="font-['ClashDisplay-Regular'] text-xs text-white/35">{String(index + 1).padStart(2, '0')}</span>
-                </div>
-                <h3 className="mt-4 font-['ClashDisplay-Regular'] text-xl font-medium text-white">{item.client}</h3>
-                <p className="mt-2 min-h-[3rem] font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/55">{item.summary}</p>
-                <button type="button" onClick={() => setSelectedProject(item)} className="mt-5 inline-flex items-center gap-2 font-['ClashDisplay-Regular'] text-sm text-[#FD7B01] hover:text-white focus:outline-none focus-visible:underline">
-                  Ver detalhes <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center justify-between gap-2">
+                <strong className="font-['ClashDisplay-Regular'] text-sm text-white">
+                  Fale com a StackByte
+                </strong>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpen(false)
+                  }
+                  aria-label="Fechar WhatsApp"
+                  className="rounded-full p-1 text-white/40 transition hover:bg-white/10 hover:text-white"
+                >
+                  <X size={16} />
                 </button>
               </div>
-            </article>
-          ))}
-        </div>
-      </div>
 
-      {selectedProject && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-sm"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setSelectedProject(null);
-          }}
-        >
-          <section
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="project-detail-title"
-            className="relative my-auto grid w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-[#100d0b] shadow-2xl md:grid-cols-[1.2fr_0.8fr]"
-          >
-            <button
-              type="button"
-              onClick={() => setSelectedProject(null)}
-              aria-label="Fechar detalhes do projeto"
-              className="absolute right-3 top-3 z-10 rounded-full border border-white/15 bg-black/70 p-2 text-white transition hover:border-[#FD7B01] hover:text-[#FD7B01] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FD7B01]"
-            >
-              <X className="h-5 w-5" aria-hidden="true" />
-            </button>
-            <div className="min-h-64 aspect-[1.35] overflow-hidden bg-[#0c0b0b] md:aspect-auto">
-              <ProjectPreview item={selectedProject} />
-            </div>
-            <div className="flex flex-col justify-center p-6 md:p-8">
-              <span className="w-fit rounded-full border border-[#FD7B01]/25 bg-[#FD7B01]/[0.08] px-3 py-1 font-['ClashDisplay-Regular'] text-xs text-[#ffac5c]">
-                {selectedProject.type}
-              </span>
-              <h3 id="project-detail-title" className="mt-4 font-['ClashDisplay-Regular'] text-2xl font-semibold text-white md:text-3xl">
-                {selectedProject.client}
-              </h3>
-              <p className="mt-3 font-['ClashDisplay-Regular'] text-sm leading-relaxed text-white/60">
-                {selectedProject.details}
+              <p className="mt-1 font-['ClashDisplay-Regular'] text-xs leading-relaxed text-white/50">
+                Tire dúvidas, fale sobre um
+                projeto ou peça um orçamento.
               </p>
-              {selectedProject.url ? (
-                <a href={selectedProject.url} target="_blank" rel="noreferrer" className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#FD7B01] px-5 py-3 font-['ClashDisplay-Regular'] text-sm font-medium text-black transition hover:bg-[#ff9a3d]">
-                  Ver no portfólio <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                </a>
-              ) : (
-                <p className="mt-6 font-['ClashDisplay-Regular'] text-sm text-white/35">Aguarde projeto em desenvolvimento.</p>
-              )}
             </div>
-          </section>
+          </div>
+
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 font-['ClashDisplay-Regular'] text-sm font-semibold text-black transition hover:bg-[#43e47c] active:scale-[0.98]"
+          >
+            Abrir WhatsApp
+            <Send size={16} />
+          </a>
         </div>
       )}
-    </section>
+
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-label={
+          open
+            ? 'Fechar contato via WhatsApp'
+            : 'Abrir contato via WhatsApp'
+        }
+        aria-expanded={open}
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_40px_-8px_rgba(37,211,102,.7)] transition duration-300 hover:scale-105 hover:shadow-[0_16px_45px_-8px_rgba(37,211,102,.85)] active:scale-95 sm:h-15 sm:w-15"
+      >
+        <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/30 duration-[2.5s]" />
+
+        {open ? (
+          <X size={23} />
+        ) : (
+          <MessageCircle
+            size={25}
+            strokeWidth={2.2}
+          />
+        )}
+
+        <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-lg border border-white/10 bg-[#100d0b] px-3 py-2 font-['ClashDisplay-Regular'] text-xs text-white shadow-xl sm:block sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100">
+          Fale com a StackByte
+        </span>
+      </button>
+    </div>
   );
 }

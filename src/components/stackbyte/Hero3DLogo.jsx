@@ -21,226 +21,709 @@ import {
   Clock,
 } from 'three';
 
-// Turns a 3-point centerline (T -> A -> B) into a closed, uniform-thickness
-// chevron polygon with a mitered inner joint at A and flat (butt) caps at T/B.
-// Not used directly anymore (we use the exact traced points below), kept for reference.
+const LEFT_ARM = [
+  [-23.6, 40.08],
+  [-47.44, 8.72],
+  [-47.6, -7.28],
+  [-23.92, -40.08],
+  [-3.44, -40.08],
+  [-33.36, 1.68],
+  [-3.28, 40.08],
+];
 
-// Exact outline points traced from the StackByte logo file (two bracket arms + center square).
-const LEFT_ARM = [[-23.6,40.08],[-47.44,8.72],[-47.6,-7.28],[-23.92,-40.08],[-3.44,-40.08],[-33.36,1.68],[-3.28,40.08]];
-const RIGHT_ARM = [[3.28,40.08],[33.36,1.68],[3.6,-40.08],[23.92,-40.08],[47.6,-7.44],[47.6,8.56],[23.76,40.08]];
-const SQUARE = [[-9.68,10.32],[-10.16,9.84],[-10.16,-9.68],[-9.68,-10.16],[10.0,-10.0],[10.16,10.0]];
+const RIGHT_ARM = [
+  [3.28, 40.08],
+  [33.36, 1.68],
+  [3.6, -40.08],
+  [23.92, -40.08],
+  [47.6, -7.44],
+  [47.6, 8.56],
+  [23.76, 40.08],
+];
 
-function shapeFromPoints(pts) {
+const SQUARE = [
+  [-9.68, 10.32],
+  [-10.16, 9.84],
+  [-10.16, -9.68],
+  [-9.68, -10.16],
+  [10, -10],
+  [10.16, 10],
+];
+
+function shapeFromPoints(points) {
   const shape = new Shape();
-  pts.forEach(([x, y], i) => (i === 0 ? shape.moveTo(x, y) : shape.lineTo(x, y)));
-  shape.closePath();
+
+  points.forEach(([x, y], index) => {
+    if (index === 0) {
+      shape.moveTo(x, y);
+    } else {
+      shape.lineTo(x, y);
+    }
+  });
+
   return shape;
 }
 
-function makeFaceCanvas(topColor, bottomColor, accent) {
-  const c = document.createElement('canvas');
-  c.width = c.height = 256;
-  const ctx = c.getContext('2d');
-  const g = ctx.createLinearGradient(0, 0, 0, 256);
-  g.addColorStop(0, topColor);
-  g.addColorStop(1, bottomColor);
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, 256, 256);
+function makeFaceCanvas(topcolor, bottomcolor, accent) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 512;
+
+  const ctx = canvas.getContext('2d');
+
+  const gradient = ctx.createLinearGradient(0, 0, 0, 512);
+
+  gradient.addColorStop(0, topcolor);
+  gradient.addColorStop(1, bottomcolor);
+
+  context.fillStyle = accent;
+  context.fillRect(0, 0, 512, 512);
+
   if (accent) {
-    ctx.fillStyle = accent;
-    ctx.fillRect(0, 90, 256, 20);
-    ctx.fillStyle = 'rgba(255,255,255,0.15)';
-    ctx.fillRect(0, 150, 256, 6);
+    constext.fillStyle = accent;
+    context.fillRect(0, 170, 512, 34);
+
+  context.fillStyle = 'rgba(255,255,255,0.12)';
+    context.fillRect(0, 300, 512, 10);
   }
-  return c;
+
+  return canvas;
 }
 
 function responsiveScale(width) {
-  if (width < 480) return 6.5;   // celular pequeno
-  if (width < 768) return 12.0;   // celular grande / tablet
-  if (width < 1200) return 16.8;  // notebook
-  return 17.6;                    // desktop grande
+  if (width < 390) return 6.2;
+  if (width < 480) return 7.8;
+  if (width < 768) return 9.8;
+  if (width < 1200) return 16.5;
+
+  return 17.6;
 }
 
-/**
- * Renders the StackByte "< [ ] >" mark as an extruded, chrome-orange 3D
- * object with studio-style lighting. Fills its parent container (give the
- * wrapper a fixed height via className, e.g. "h-[420px] w-full").
- */
-export default function Hero3DLogo({ className = '' }) {
+export default function Hero3DLogo ({ className = '' }) {
   const mountRef = useRef(null);
 
   useEffect(() => {
     const mount = mountRef.current;
-    if (!mount) return;
+
+    if (!mount) return undefined;
 
     let width = mount.clientWidth;
     let height = mount.clientHeight;
+
+    if (!width || !height) return undefined;
+
     const isMobile = width < 768;
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
     const scene = new Scene();
-    scene.background = null;
+    
+    const camera = new PerspectiveCamera (
+      42,
+      width / height,
+      0.1,
+      6000
+    );
 
-    const camera = new PerspectiveCamera(44, width / height, 0.1, 6000);
-    camera.position.set(0, 10, 2600);
+    camera.position.set(0, 0, 2600);
 
-    const renderer = new WebGLRenderer({ antialias: !isMobile, alpha: true, powerPreference: 'high-performance' });
+    const renderer =new WebGLRenderer ({
+      antialias: !ismobile,
+      alpha: true,
+      powerPreference: 'high-performance',
+    });
+
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-    renderer.outputColorSpace = SRGBColorSpace;
+
+    rederer.setPixelRatio(
+      math.min (
+        window.devicePixelRatio || 1,
+        instance.isMobile ? 1.35 : 2,
+      ),
+    );
+      renderer.outputColorSpace = SRGBColorSpace;
     renderer.toneMapping = ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.95;
+    renderer.toneMappingExposure = 1.05;
+
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    renderer.domElement.style.display = 'block';
+    renderer.domElement.style.touchAction = 'none';
+
     mount.appendChild(renderer.domElement);
 
-    // ---------- procedural studio environment (for chrome reflections) ----------
+    // --------------------------------------------------
+    // ENVIRONMENT
+    // --------------------------------------------------
+
     const envFaces = [
-      makeFaceCanvas('#3a1c08', '#080505', 'rgba(255,255,255,0.55)'),
-      makeFaceCanvas('#3a1c08', '#080505', 'rgba(255,157,0,0.5)'),
-      makeFaceCanvas('#ffffff', '#5a5a60'),
-      makeFaceCanvas('#0a0705', '#000000'),
-      makeFaceCanvas('#3a1c08', '#080505', 'rgba(255,157,0,0.55)'),
-      makeFaceCanvas('#2a1506', '#080505', 'rgba(255,255,255,0.45)'),
+      makeFaceCanvas(
+        '#3b1c08',
+        '#050303',
+        'rgba(255,255,255,0.6)',
+      ),
+
+      makeFaceCanvas(
+        '#512707',
+        '#080505',
+        'rgba(255,157,0,0.65)',
+      ),
+
+      makeFaceCanvas(
+        '#ffffff',
+        '#626268',
+        'rgba(255,255,255,0.8)',
+      ),
+
+      makeFaceCanvas(
+        '#0b0705',
+        '#000000',
+        null,
+      ),
+
+      makeFaceCanvas(
+        '#3b1c08',
+        '#080505',
+        'rgba(255,157,0,0.65)',
+      ),
+
+      makeFaceCanvas(
+        '#2a1506',
+        '#070403',
+        'rgba(255,255,255,0.5)',
+      ),
     ];
+
     const envMap = new CubeTexture(envFaces);
+
     envMap.needsUpdate = true;
+
     scene.environment = envMap;
 
-    // ---------- logo geometry ----------
-    const extrudeSettings = {
-      depth: 16,
-      bevelEnabled: true,
-      bevelThickness: 2.2,
-      bevelSize: 2.2,
-      bevelSegments: isMobile ? 3 : 6,
-      curveSegments: isMobile ? 6 : 12,
-    };
-    const squareExtrude = { ...extrudeSettings, depth: 14, bevelThickness: 1.6, bevelSize: 1.6 };
+    // --------------------------------------------------
+    // MATERIAL
+    // --------------------------------------------------
 
-    const chromeMat = new MeshPhysicalMaterial({
+    const chromeMaterial = new MeshPhysicalMaterial({
       color: 0xfd7b01,
       metalness: 1,
-      roughness: 0.05,
+      roughness: 0.075,
+
       clearcoat: 1,
-      clearcoatRoughness: 0.02,
-      envMapIntensity: 2.1,
+      clearcoatRoughness: 0.025,
+
+      envMapIntensity: 2.5,
       reflectivity: 1,
-      side: DoubleSide,
+
       emissive: 0x3a1600,
-      emissiveIntensity: 0.08,
+      emissiveIntensity: 0.075,
+
+      side: DoubleSide,
     });
+
+    // --------------------------------------------------
+    // GEOMETRY
+    // --------------------------------------------------
+
+    const extrudeSettings = {
+      depth: 18,
+
+      bevelEnabled: true,
+      bevelThickness: 2.5,
+      bevelSize: 2.5,
+
+      bevelSegments: isMobile ? 4 : 8,
+      curveSegments: isMobile ? 8 : 16,
+
+      steps: 1,
+    };
+
+    const squareExtrude = {
+      ...extrudeSettings,
+      depth: 16,
+      bevelThickness: 1.8,
+      bevelSize: 1.8,
+    };
 
     const logoGroup = new Group();
-    [LEFT_ARM, RIGHT_ARM].forEach((pts) => {
-      const geo = new ExtrudeGeometry(shapeFromPoints(pts), extrudeSettings);
-      const mesh = new Mesh(geo, chromeMat);
+
+    const geometries = [];
+
+    [LEFT_ARM, RIGHT_ARM].forEach((points) => {
+      const geometry = new ExtrudeGeometry(
+        shapeFromPoints(points),
+        extrudeSettings,
+      );
+
+      geometry.computeVertexNormals();
+
+      const mesh = new Mesh(
+        geometry,
+        chromeMaterial,
+      );
+
       mesh.position.z = -extrudeSettings.depth / 2;
-      mesh.frustumCulled = false;
+
       logoGroup.add(mesh);
+
+      geometries.push(geometry);
     });
-    const sqGeo = new ExtrudeGeometry(shapeFromPoints(SQUARE), squareExtrude);
-    const sqMesh = new Mesh(sqGeo, chromeMat);
-    sqMesh.position.z = -squareExtrude.depth / 2;
-    logoGroup.add(sqMesh);
 
-    logoGroup.scale.setScalar(responsiveScale(width));
-    // Move the 3D mark slightly to the right inside the hero.
-    logoGroup.position.x = width < 768 ? 0 : 235;
-    scene.add(logoGroup);
+    const squareGeometry = new ExtrudeGeometry(
+      shapeFromPoints(SQUARE),
+      squareExtrude,
+    );
 
-    // Keep the entire 3D mark inside the canvas at every rotation angle.
-    // The old fixed camera distance was too close for the enlarged logo,
-    // causing it to be clipped as the object rotated.
-    const fitCamera = () => {
-      logoGroup.updateMatrixWorld(true);
-      const box = new Box3().setFromObject(logoGroup);
-      const sphere = box.getBoundingSphere(new Sphere());
-      const halfFov = MathUtils.degToRad(camera.fov * 0.5);
-      const distanceForHeight = sphere.radius / Math.tan(halfFov);
-      const distanceForWidth = sphere.radius / (Math.tan(halfFov) * camera.aspect);
-      const distance = Math.max(distanceForHeight, distanceForWidth) * 1.32;
-      camera.position.z = Math.max(1500, distance);
-      // Keep the logo visually to the right while leaving enough horizontal breathing room.
-      const viewTargetX = width < 768 ? 45 : 95;
-      camera.lookAt(viewTargetX, 0, 0);
-    };
-    fitCamera();
+    squareGeometry.computeVertexNormals();
 
-    // ---------- lighting ----------
-    scene.add(new AmbientLight(0x1a1418, 0.5));
-    const key = new DirectionalLight(0xffffff, 1.6);
-    key.position.set(980, 1400, 1680);
-    scene.add(key);
-    const rim = new PointLight(0xffffff, 2.2, 6300);
-    rim.position.set(140, 980, -1540);
-    scene.add(rim);
-    if (!isMobile) {
-      const warm = new PointLight(0xff9d00, 1.6, 4900);
-      warm.position.set(-1190, 420, 1400);
-      scene.add(warm);
-      const kicker = new PointLight(0xfd7b01, 2.0, 4900);
-      kicker.position.set(1260, 420, 840);
-      scene.add(kicker);
-    }
+    const squareMesh = new Mesh(
+      squareGeometry,
+      chromeMaterial,
+    );
 
-    // ---------- interaction ----------
-    let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
-    const onMouseMove = (e) => {
-      const rect = mount.getBoundingClientRect();
-      mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-      mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-    };
-    window.addEventListener('mousemove', onMouseMove);
+    squareMesh.position.z = -squareExtrude.depth / 2;
 
-    const clock = new Clock();
-    let frameId;
-    let running = true;
-    function animate() {
-      if (!running) return;
-      frameId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
-      curX += (mouseX - curX) * 0.05;
-      curY += (mouseY - curY) * 0.05;
-      logoGroup.rotation.y = t * 0.25 + curX * 0.8;
-      logoGroup.rotation.x = curY * 0.35;
-      renderer.render(scene, camera);
-    }
-    animate();
+    logoGroup.add(squareMesh);
 
-    const onVisibility = () => {
-      running = !document.hidden;
-      if (running) {
-        clock.getDelta(); // avoid a big time jump after coming back
-        animate();
+    geometries.push(squareGeometry);
+
+    // --------------------------------------------------
+    // POSITION
+    // --------------------------------------------------
+
+    const updateLogoLayout = () => {
+      logoGroup.scale.setScalar(
+        responsiveScale(width),
+      );
+
+      if (width < 768) {
+        logoGroup.position.x = 0;
+        logoGroup.position.y = 0;
       } else {
-        cancelAnimationFrame(frameId);
+        logoGroup.position.x = 225;
+        logoGroup.position.y = 0;
       }
     };
-    document.addEventListener('visibilitychange', onVisibility);
 
-    const onResize = () => {
-      width = mount.clientWidth;
-      height = mount.clientHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-      logoGroup.scale.setScalar(responsiveScale(width));
-      logoGroup.position.x = width < 768 ? 105 : 235;
-      fitCamera();
+    updateLogoLayout();
+
+    scene.add(logoGroup);
+
+    // --------------------------------------------------
+    // CAMERA FIT
+    // --------------------------------------------------
+
+    const fitCamera = () => {
+      logoGroup.updateMatrixWorld(true);
+
+      const box = new Box3().setFromObject(
+        logoGroup,
+      );
+
+      const sphere = box.getBoundingSphere(
+        new Sphere(),
+      );
+
+      const halfFov = MathUtils.degToRad(
+        camera.fov * 0.5,
+      );
+
+      const distanceForHeight =
+        sphere.radius / Math.tan(halfFov);
+
+      const distanceForWidth =
+        sphere.radius /
+        (Math.tan(halfFov) * camera.aspect);
+
+      const distance =
+        Math.max(
+          distanceForHeight,
+          distanceForWidth,
+        ) * 1.42;
+
+      camera.position.z = Math.max(
+        1500,
+        distance,
+      );
+
+      const targetX =
+        width < 768 ? 0 : 65;
+
+      camera.lookAt(
+        targetX,
+        0,
+        0,
+      );
     };
-    window.addEventListener('resize', onResize);
+
+    fitCamera();
+
+    // --------------------------------------------------
+    // LIGHTING
+    // --------------------------------------------------
+
+    scene.add(
+      new AmbientLight(
+        0x1a1418,
+        0.65,
+      ),
+    );
+
+    const keyLight =
+      new DirectionalLight(
+        0xffffff,
+        1.9,
+      );
+
+    keyLight.position.set(
+      900,
+      1400,
+      1700,
+    );
+
+    scene.add(keyLight);
+
+    const rimLight =
+      new PointLight(
+        0xffffff,
+        2.4,
+        6300,
+      );
+
+    rimLight.position.set(
+      150,
+      950,
+      -1450,
+    );
+
+    scene.add(rimLight);
+
+    const warmLight =
+      new PointLight(
+        0xff9d00,
+        isMobile ? 0.9 : 1.8,
+        4900,
+      );
+
+    warmLight.position.set(
+      -1150,
+      450,
+      1400,
+    );
+
+    scene.add(warmLight);
+
+    const orangeLight =
+      new PointLight(
+        0xfd7b01,
+        isMobile ? 0.8 : 2.1,
+        4900,
+      );
+
+    orangeLight.position.set(
+      1250,
+      400,
+      850,
+    );
+
+    scene.add(orangeLight);
+
+    // --------------------------------------------------
+    // INTERACTION
+    // --------------------------------------------------
+
+    let targetX = 0;
+    let targetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+    let velocityX = 0;
+    let velocityY = 0;
+
+    let pointerDown = false;
+
+    let lastPointerX = 0;
+    let lastPointerY = 0;
+
+    const setPointerTarget = (
+      clientX,
+      clientY,
+    ) => {
+      const rect =
+        mount.getBoundingClientRect();
+
+      targetX =
+        ((clientX - rect.left) /
+          rect.width -
+          0.5);
+
+      targetY =
+        ((clientY - rect.top) /
+          rect.height -
+          0.5);
+    };
+
+    const onPointerMove = (event) => {
+      setPointerTarget(
+        event.clientX,
+        event.clientY,
+      );
+
+      if (!pointerDown) return;
+
+      const deltaX =
+        event.clientX - lastPointerX;
+
+      const deltaY =
+        event.clientY - lastPointerY;
+
+      velocityY += deltaX * 0.0035;
+      velocityX += deltaY * 0.002;
+
+      lastPointerX = event.clientX;
+      lastPointerY = event.clientY;
+    };
+
+    const onPointerDown = (event) => {
+      pointerDown = true;
+
+      lastPointerX = event.clientX;
+      lastPointerY = event.clientY;
+
+      renderer.domElement.setPointerCapture?.(
+        event.pointerId,
+      );
+
+      setPointerTarget(
+        event.clientX,
+        event.clientY,
+      );
+    };
+
+    const onPointerUp = (event) => {
+      pointerDown = false;
+
+      renderer.domElement.releasePointerCapture?.(
+        event.pointerId,
+      );
+    };
+
+    const onPointerLeave = () => {
+      if (!pointerDown) {
+        targetX *= 0.7;
+        targetY *= 0.7;
+      }
+    };
+
+    renderer.domElement.addEventListener(
+      'pointermove',
+      onPointerMove,
+    );
+
+    renderer.domElement.addEventListener(
+      'pointerdown',
+      onPointerDown,
+    );
+
+    renderer.domElement.addEventListener(
+      'pointerup',
+      onPointerUp,
+    );
+
+    renderer.domElement.addEventListener(
+      'pointercancel',
+      onPointerUp,
+    );
+
+    renderer.domElement.addEventListener(
+      'pointerleave',
+      onPointerLeave,
+    );
+
+    // --------------------------------------------------
+    // ANIMATION
+    // --------------------------------------------------
+
+    const clock = new Clock();
+
+    let animationFrame;
+    let running = true;
+
+    const animate = () => {
+      if (!running) return;
+
+      animationFrame =
+        requestAnimationFrame(animate);
+
+      const time =
+        clock.getElapsedTime();
+
+      currentX +=
+        (targetX - currentX) *
+        0.055;
+
+      currentY +=
+        (targetY - currentY) *
+        0.055;
+
+      velocityX *= 0.92;
+      velocityY *= 0.92;
+
+      if (!reducedMotion) {
+        logoGroup.rotation.y +=
+          velocityY;
+
+        logoGroup.rotation.x +=
+          velocityX;
+
+        logoGroup.rotation.y +=
+          0.0025;
+
+        logoGroup.rotation.x =
+          currentY * 0.32;
+
+        logoGroup.rotation.z =
+          currentX * 0.06;
+
+        logoGroup.position.y =
+          Math.sin(time * 0.8) *
+          3;
+      }
+
+      renderer.render(
+        scene,
+        camera,
+      );
+    };
+
+    animate();
+
+    // --------------------------------------------------
+    // VISIBILITY
+    // --------------------------------------------------
+
+    const onVisibilityChange = () => {
+      running =
+        !document.hidden;
+
+      if (running) {
+        clock.start();
+        animate();
+      } else {
+        cancelAnimationFrame(
+          animationFrame,
+        );
+      }
+    };
+
+    document.addEventListener(
+      'visibilitychange',
+      onVisibilityChange,
+    );
+
+    // --------------------------------------------------
+    // RESIZE
+    // --------------------------------------------------
+
+    const resizeObserver =
+      new ResizeObserver(() => {
+        width =
+          mount.clientWidth;
+
+        height =
+          mount.clientHeight;
+
+        if (!width || !height) return;
+
+        camera.aspect =
+          width / height;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+          width,
+          height,
+          false,
+        );
+
+        updateLogoLayout();
+        fitCamera();
+      });
+
+    resizeObserver.observe(mount);
+
+    // --------------------------------------------------
+    // CLEANUP
+    // --------------------------------------------------
 
     return () => {
       running = false;
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('resize', onResize);
-      document.removeEventListener('visibilitychange', onVisibility);
+
+      cancelAnimationFrame(
+        animationFrame,
+      );
+
+      resizeObserver.disconnect();
+
+      document.removeEventListener(
+        'visibilitychange',
+        onVisibilityChange,
+      );
+
+      renderer.domElement.removeEventListener(
+        'pointermove',
+        onPointerMove,
+      );
+
+      renderer.domElement.removeEventListener(
+        'pointerdown',
+        onPointerDown,
+      );
+
+      renderer.domElement.removeEventListener(
+        'pointerup',
+        onPointerUp,
+      );
+
+      renderer.domElement.removeEventListener(
+        'pointercancel',
+        onPointerUp,
+      );
+
+      renderer.domElement.removeEventListener(
+        'pointerleave',
+        onPointerLeave,
+      );
+
+      geometries.forEach((geometry) => {
+        geometry.dispose();
+      });
+
+      chromeMaterial.dispose();
+      envMap.dispose();
+
       renderer.dispose();
-      chromeMat.dispose();
-      envFaces.forEach(() => {});
-      if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
+
+      if (
+        mount.contains(
+          renderer.domElement,
+        )
+      ) {
+        mount.removeChild(
+          renderer.domElement,
+        );
+      }
     };
   }, []);
 
-  return <div ref={mountRef} className={className} />;
+  return (
+    <div
+      ref={mountRef}
+      className={className}
+      aria-label="Logo 3D da StackByte"
+      role="img"
+    />
+  );
 }
