@@ -76,15 +76,15 @@ function makeFaceCanvas(topcolor, bottomcolor, accent) {
   gradient.addColorStop(0, topcolor);
   gradient.addColorStop(1, bottomcolor);
 
-  context.fillStyle = accent;
-  context.fillRect(0, 0, 512, 512);
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 512, 512);
 
   if (accent) {
-    constext.fillStyle = accent;
-    context.fillRect(0, 170, 512, 34);
+    ctx.fillStyle = accent;
+    ctx.fillRect(0, 170, 512, 34);
 
-  context.fillStyle = 'rgba(255,255,255,0.12)';
-    context.fillRect(0, 300, 512, 10);
+  ctx.fillStyle = 'rgba(255,255,255,0.12)';
+    ctx.fillRect(0, 300, 512, 10);
   }
 
   return canvas;
@@ -129,17 +129,17 @@ export default function Hero3DLogo ({ className = '' }) {
     camera.position.set(0, 0, 2600);
 
     const renderer =new WebGLRenderer ({
-      antialias: !ismobile,
+      antialias: !isMobile,
       alpha: true,
       powerPreference: 'high-performance',
     });
 
     renderer.setSize(width, height);
 
-    rederer.setPixelRatio(
-      math.min (
+    renderer.setPixelRatio(
+      Math.min (
         window.devicePixelRatio || 1,
-        instance.isMobile ? 1.35 : 2,
+        isMobile ? 1.35 : 2,
       ),
     );
       renderer.outputColorSpace = SRGBColorSpace;
