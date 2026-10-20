@@ -1,23 +1,24 @@
-import Navbar from '../components/stackbyte/Navbar';
-import Hero from '../components/stackbyte/Hero';
-import WhatWeDo from '../components/stackbyte/WhatWeDo';
-import CaseStudies from '../components/stackbyte/CaseStudies';
-import Testimonials from '../components/stackbyte/Testimonials';
-import CTA from '../components/stackbyte/CTA';
-import Footer from '../components/stackbyte/Footer';
-import FloatingWhatsApp from '../components/stackbyte/FloatingWhatsApp';
+import { useEffect, useRef } from 'react';
+import html from '../newhome/home.html?raw';
+import initHome from '../newhome/homeInit.js';
+import '../newhome/home.css';
 
+// Nova home da StackByte. O CSS e o HTML ficam isolados em .sbh para não afetar as outras páginas.
 export default function Home() {
-  return (
-    <div className="bg-[#080505] text-white">
-      <Navbar />
-      <Hero />
-      <WhatWeDo />
-      <CaseStudies />
-      <Testimonials />
-      <CTA />
-      <Footer />
-      <FloatingWhatsApp />
-    </div>
-  );
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const prev = [root.style.scrollBehavior, root.style.scrollPaddingTop];
+    root.style.scrollBehavior = 'smooth';
+    root.style.scrollPaddingTop = '90px';
+    const cleanup = initHome();
+    return () => {
+      cleanup();
+      root.style.scrollBehavior = prev[0];
+      root.style.scrollPaddingTop = prev[1];
+    };
+  }, []);
+
+  return <div className="sbh" ref={ref} dangerouslySetInnerHTML={{ __html: html }} />;
 }
